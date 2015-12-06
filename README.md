@@ -1,7 +1,7 @@
 # startpage
-My custom startpage. It serves as a launchpad to my commonly visited sites, a prettier face to the (Startpage)[https://startpage.com/] search engine, and dashboard for some of my frequent web activity. It is relatively simple, dynamic client app backed by a RESTful [Sinatra](http://www.sinatrarb.com/) API that powers features such as Twitter and Reddit integration.
+My custom startpage. It serves as a launchpad to my commonly visited sites, a prettier face to the [Startpage](https://startpage.com/) search engine, and dashboard for some of my frequent web activity. It is relatively simple, dynamic client app backed by a RESTful [Sinatra](http://www.sinatrarb.com/) API that powers features such as Twitter and Reddit integration.
 
-**Status:** *super early development*
+**Status:** super early development
 
 ## Intended Features
 * Reddit top posts widget
@@ -18,6 +18,7 @@ My custom startpage. It serves as a launchpad to my commonly visited sites, a pr
 * jQuery
 * SASS
 * Slim
+
 ### Server
 * Sinatra
 * MongoDb
