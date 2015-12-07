@@ -4,7 +4,7 @@ $primary-color: #333333
 $header-height: 40px
 $footer-height: 15vh
 
-=border-radius($radius)
+=-radius($radius)
   -webkit-border-radius: $radius
   -moz-border-radius: $radius
   -ms-border-radius: $radius
@@ -35,7 +35,6 @@ body,
   &::after
     content: ""
     background: dimgray
-    border: 1px solid black
     opacity: 0.5
     top: 0
     left: 0
@@ -44,21 +43,29 @@ body,
     position: absolute
     z-index: -1
 
-.search
+div.search
+  height: 25px
+  width: 60%
+  display: inline-block
+  margin: 25px
+  text-align: left
 
-  div
-    width: 40%
-    display: inline-block
-    background: red
+input.search
+  height: 100%
+  width: 60%
+  background: rgba(250, 250, 250, 0.5)
+  border: none
+  font-size: 1.2em
+  padding: 5px
+  color: #4d4d4d
 
-  input
-    height: $header-height/2
-    width: 50%
-    background: linear-gradient(to bottom, white, lightgray)
-    +border-radius(15px)
+  &:focus
+    outline: none
+    background: rgba(250, 250, 250, 0.75)
 
 .content
   margin-top: $header-height
+  text-align: center
 
 .footer
   position: fixed
@@ -67,11 +74,10 @@ body,
   display: block
   width: 100%
   height: $footer-height
-  
+
   &::after
     content: ""
     background: linear-gradient(to bottom, transparent, black)
-    border: 1px solid black
     opacity: 0.75
     top: 0
     left: 0
