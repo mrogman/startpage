@@ -4,7 +4,7 @@ $primary-color: #333333
 $header-height: 40px
 $footer-height: 15vh
 
-=-radius($radius)
+=border-radius($radius)
   -webkit-border-radius: $radius
   -moz-border-radius: $radius
   -ms-border-radius: $radius
@@ -22,8 +22,7 @@ body,
   overflow: hidden
 
 .main
-  //background: url('http://www.techgrapple.com/wp-content/uploads/2015/07/Night%20beautiful%20HD%20wallpapers%20for%20desktop.jpg')
-  background: url('img/6899516-dark-background.jpg')
+  background: url('http://www.techgrapple.com/wp-content/uploads/2015/07/Night%20beautiful%20HD%20wallpapers%20for%20desktop.jpg')
   background-size: cover
   background-position: center
 
@@ -55,21 +54,19 @@ div.v-split
   width: 200px
   height: 100%
   display: table-cell
-  //&#v-left, &#v-right
-    
 
   &#v-middle
     width: 800px
     vertical-align: middle
 
     .gateway-container
-      width: 100%
+    
+      width: 510px
       margin: 0 auto
       text-align: left
 
       .gateway
         width: 100%
-        height: 400px
 
 div.s-box
   width: 150px
@@ -90,7 +87,7 @@ div.search
   height: $sb-height
   width: 100%
   display: inline-block
-  margin: 10px
+  margin: 20px 10px
   text-align: left
 
   $hi-color: rgba(255, 255, 255, 0.85)
@@ -126,7 +123,23 @@ div.search
     &:hover
       background: $hi-color
 
+div.widget-bar
+  display: flex
+  justify-content: space-between
+  width: 100%
+  height: 75px
+  padding: 0 10px
+  box-sizing: border-box
+  margin: 20px 0
 
+  .wi-launcher
+    display: inline-block
+    width: 75px
+    height: 100%
+    box-sizing: border-box
+    padding: 10px
+    //dev
+    background: rgba(255, 255, 255, 0.5)
 
 .footer
   position: fixed
