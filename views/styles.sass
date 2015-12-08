@@ -60,19 +60,20 @@ div.v-split
     vertical-align: middle
 
     .gateway-container
-    
       width: 510px
-      margin: 0 auto
+      margin: -30vh auto 0
       text-align: left
 
       .gateway
         width: 100%
 
 div.s-box
+  box-sizing: border-box
   width: 150px
   height: 100px
   display: inline-block
-  background: #FFCC00
+  background: rgba(50, 50, 50, 0.75)
+  border: 1px solid rgba(20, 189, 226, 0.5)
   margin: 10px
   font-size: 1.2em
 
@@ -81,13 +82,15 @@ div.s-box
     padding: 10px
     margin: 0
     font-weight: bold
+    color: white
 
 div.search
   $sb-height: 35px
+  $lr-margin: 10px
   height: $sb-height
   width: 100%
   display: inline-block
-  margin: 20px 10px
+  margin: 20px $lr-margin
   text-align: left
 
   $hi-color: rgba(255, 255, 255, 0.85)
@@ -105,32 +108,40 @@ div.search
     background: $hi-color
 
   input
+    box-sizing: border-box
     display: inline-block
     height: 100%
     width: 200px
-    background: rgba(150, 150, 150, 0.5)
+    background: rgba(255, 255, 255, 0.5)
     border: none
-    font-size: 1.2em
+    font-size: 1em
+    font-style: italic
     padding: 5px 10px
     color: #4d4d4d
+    transition: width 0.3s, transform 0.3s
+
 
     &:focus
       outline: none
       background: $hi-color
-      width: 80%
-      transition: 0.3s
+      width: calc(100% - #{$sb-height} - 2*#{$lr-margin})
+      transform: translateY(-3px)
+      -webkit-box-shadow: 5px 4px 5px -1px rgba(0,0,0,0.5)
+      -moz-box-shadow: 5px 4px 5px -1px rgba(0,0,0,0.5)
+      box-shadow: 5px 4px 5px -1px rgba(0,0,0,0.5)
 
     &:hover
       background: $hi-color
 
 div.widget-bar
+  position: fixed
+  bottom: 20vh
   display: flex
   justify-content: space-between
-  width: 100%
+  width: inherit
   height: 75px
   padding: 0 10px
   box-sizing: border-box
-  margin: 20px 0
 
   .wi-launcher
     display: inline-block
