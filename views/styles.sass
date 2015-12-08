@@ -22,7 +22,8 @@ body,
   overflow: hidden
 
 .main
-  background: url('http://www.techgrapple.com/wp-content/uploads/2015/07/Night%20beautiful%20HD%20wallpapers%20for%20desktop.jpg')
+  //background: url('http://www.techgrapple.com/wp-content/uploads/2015/07/Night%20beautiful%20HD%20wallpapers%20for%20desktop.jpg')
+  background: url('img/6899516-dark-background.jpg')
   background-size: cover
   background-position: center
 
@@ -43,15 +44,56 @@ body,
     position: absolute
     z-index: -1
 
+div.content
+  display: table
+  width: 100%
+  height: 90%
+  margin-top: $header-height
+  text-align: center
+
+div.v-split
+  width: 200px
+  height: 100%
+  display: table-cell
+  //&#v-left, &#v-right
+    
+
+  &#v-middle
+    width: 800px
+    vertical-align: middle
+
+    .gateway-container
+      width: 100%
+      margin: 0 auto
+      text-align: left
+
+      .gateway
+        width: 100%
+        height: 400px
+
+div.s-box
+  width: 150px
+  height: 100px
+  display: inline-block
+  background: #FFCC00
+  margin: 10px
+  font-size: 1.2em
+
+  p
+    float: left
+    padding: 10px
+    margin: 0
+    font-weight: bold
+
 div.search
   $sb-height: 35px
   height: $sb-height
-  width: 60%
+  width: 100%
   display: inline-block
-  margin: 25px
+  margin: 10px
   text-align: left
 
-  $hi-color: rgba(250, 250, 250, 0.75)
+  $hi-color: rgba(255, 255, 255, 0.85)
 
   #search-left, input
     -moz-box-sizing: border-box
@@ -68,8 +110,8 @@ div.search
   input
     display: inline-block
     height: 100%
-    width: 60%
-    background: rgba(250, 250, 250, 0.5)
+    width: 200px
+    background: rgba(150, 150, 150, 0.5)
     border: none
     font-size: 1.2em
     padding: 5px 10px
@@ -78,14 +120,13 @@ div.search
     &:focus
       outline: none
       background: $hi-color
+      width: 80%
+      transition: 0.3s
 
     &:hover
       background: $hi-color
 
 
-.content
-  margin-top: $header-height
-  text-align: center
 
 .footer
   position: fixed
