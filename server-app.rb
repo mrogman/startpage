@@ -1,7 +1,8 @@
 require 'sinatra'
+require 'mongo'
 require 'json'
 
-# helpers to retrieve twitter dat
+# helpers to retrieve twitter data
 class TwitterAdapter
   def auth(user, pass)
     # authenticate
