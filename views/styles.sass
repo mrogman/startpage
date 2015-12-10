@@ -1,7 +1,7 @@
 $font-stack: sans-serif
 $primary-color: #333333
 
-$header-height: 40px
+$header-height: 30px
 $footer-height: 15vh
 
 =border-radius($radius)
@@ -22,7 +22,7 @@ body,
   overflow: hidden
 
 .main
-  background: url('http://www.techgrapple.com/wp-content/uploads/2015/07/Night%20beautiful%20HD%20wallpapers%20for%20desktop.jpg')
+  background: url('img/main/bg.jpg')
   background-size: cover
   background-position: center
 
@@ -31,17 +31,7 @@ body,
   position: fixed
   height: $header-height
   width: 100%
-
-  &::after
-    content: ""
-    background: dimgray
-    opacity: 0.5
-    top: 0
-    left: 0
-    bottom: 0
-    right: 0
-    position: absolute
-    z-index: -1
+  background: rgba(100, 100, 100, 0.5)
 
 div.content
   display: table
@@ -67,11 +57,9 @@ div.v-split
 
     .gateway-container
       position: absolute
-      //top: calc(#{$header-height} + 5vh)
-      top: 60px
+      top: $header-height
       width: inherit
-      //margin: 0 auto
-      text-align: left
+      text-align: center
 
       .gateway
         width: 100%
@@ -80,27 +68,39 @@ div.v-split
 div.s-box
   box-sizing: border-box
   width: 175px
-  height: 45vh
+  height: 40vh
   display: inline-block
-  background: rgba(150, 150, 150, 0.5)
-  border: 1px solid rgba(20, 189, 226, 0.5)
+  //background: rgba(150, 150, 150, 0.5)
+  background: lightgray
+  //border: 1px solid rgba(20, 189, 226, 0.5)
   margin: 10px
   font-size: 1.2em
 
+ 
+  &#cat-social
+    background: url('img/category_bg/social.jpg')
+    background-size: cover
+
+  //&#cat-programming
+    //background: url('img/category_bg/programming.jpg')
+    //background-size: cover
+
   p
+    box-sizing: border-box
     float: left
-    padding: 10px
+    padding: 5px 10px
     margin: 0
-    font-weight: bold
-    color: $primary-color
+    color: white
+    background: rgba(50, 50, 50, 0.75)
 
 div.search
   $sb-height: 35px
   $lr-margin: 10px
   height: $sb-height
   width: 100%
+  max-width: 700px
   display: inline-block
-  margin: 20px $lr-margin
+  margin: 10vh $lr-margin 7vh
   text-align: left
 
   $hi-color: rgba(255, 255, 255, 0.85)
@@ -153,9 +153,11 @@ div.widget-bar
   display: flex
   justify-content: space-between
   width: 100%
+  max-width: 700px
   height: 10vh
   padding: 0 10px
   box-sizing: border-box
+  margin: 0 auto
 
   .wi-launcher
     display: inline-block
