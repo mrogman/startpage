@@ -35,48 +35,42 @@ body,
 
 div.content
   display: table
-  width: 100%
-  height: 90%
-  margin-top: $header-height
+  width: 75%
+  max-width: 700px
+  height: calc(100% - #{$header-height})
+  margin: $header-height auto 0
   text-align: center
 
-div.v-split
-  width: 200px
-  height: 100%
-  display: table-cell
-
-  //&#v-left, &#v-right
-    //width: 15%
-
-  &#v-middle, .gateway-container, .gateway
-    overflow-x: hidden
-
-  &#v-middle
-    width: 75%
+  .gateway
+    display: table-cell
+    width: 100%
+    text-align: center
     vertical-align: middle
 
-    .gateway-container
-      position: absolute
-      top: $header-height
-      width: inherit
-      text-align: center
+    .category-viewer-placeholder
+      $cat-viewer-height: 40vh
+      $cat-viewer-ph-height: 50vh
+      height: $cat-viewer-ph-height
 
-      .gateway
-        width: 100%
+      .category-viewer
+        box-sizing: border-box
+        position: absolute
+        left: 0
+        width: 95%
+        margin: 0 2.5%
+        margin-top: calc((#{$cat-viewer-ph-height} - #{$cat-viewer-height})/2) //vertically center div within placeholder div
         white-space: nowrap
+        overflow: hidden
 
-div.s-box
+div.category
   box-sizing: border-box
   width: 175px
   height: 40vh
   display: inline-block
-  //background: rgba(150, 150, 150, 0.5)
   background: lightgray
-  //border: 1px solid rgba(20, 189, 226, 0.5)
-  margin: 10px
-  font-size: 1.2em
+  margin: 0 10px
+  font-size: 1em
 
- 
   &#cat-social
     background: url('img/category_bg/social.jpg')
     background-size: cover
@@ -96,14 +90,13 @@ div.s-box
 div.search
   $sb-height: 35px
   $lr-margin: 10px
+  $hi-color: rgba(255, 255, 255, 0.85)
   height: $sb-height
   width: 100%
   max-width: 700px
   display: inline-block
-  margin: 10vh $lr-margin 7vh
+  margin: 0 $lr-margin 1.5em
   text-align: left
-
-  $hi-color: rgba(255, 255, 255, 0.85)
 
   #search-left, input
     -moz-box-sizing: border-box
@@ -144,12 +137,10 @@ div.search
       background: $hi-color
 
 div.shortcut-bar-wrapper
-  width: inherit
-  height: 20vh
-  position: fixed
-  bottom: 0
+  width: 100%
+  margin: 1.5em 0 0
 
-div.widget-bar
+div.shortcut-bar
   display: flex
   justify-content: space-between
   width: 100%
@@ -159,7 +150,7 @@ div.widget-bar
   box-sizing: border-box
   margin: 0 auto
 
-  .wi-launcher
+  .shortcut
     display: inline-block
     width: 10vh
     height: 10vh
