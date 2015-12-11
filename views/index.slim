@@ -5,9 +5,10 @@ html
     title Startpage
     link href="/styles.css" rel="stylesheet" type="text/css"
     script type="text/javascript" src="vendor/js/jquery-1.11.3.js"
-    script type="text/javascript" src="js/main.js"
     script type="text/javascript" src="vendor/js/handlebars-v4.0.5.js"
+    script type="text/javascript" src="vendor/js/underscore-min.js"
     script type="text/javascript" src="vendor/js/backbone.js"
+    script type="text/javascript" src="js/main.js"
 
   body
 
@@ -25,19 +26,20 @@ html
               input.search type="text" placeholder="Search DuckDuckGo..."
 
             .category-viewer-placeholder
-              .category-viewer
-                .category#cat-social
-                  p Social
-                .category#cat-programming
-                  p Programming
-                .category
-                  p Tech
-                .category
-                  p Medical
-                .category
-                  p Entertainment
-                .category
-                  p Misc
+              script#categoryViewTemplate type="text/x-handlebars-template"
+                .category-viewer
+                  .category#cat-social
+                    p Social
+                  .category#cat-programming
+                    p Programming
+                  .category
+                    p Tech
+                  .category
+                    p Medical
+                  .category
+                    p Entertainment
+                  .category
+                    p Misc
 
             .shortcut-bar-wrapper
               .shortcut-bar
