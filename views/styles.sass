@@ -34,20 +34,30 @@ body,
   background: rgba(100, 100, 100, 0.5)
 
 div.content
+  display: table
   width: 75%
+  max-width: 700px
   height: calc(100% - #{$header-height})
   margin: $header-height auto 0
   text-align: center
 
   .gateway
-    position: absolute
-    top: $header-height
-    width: inherit
+    display: table-cell
+    width: 100%
     text-align: center
+    vertical-align: middle
 
-    .category-viewer
-      width: 100%
-      white-space: nowrap
+    .category-viewer-placeholder
+      height: 40vh
+
+      .category-viewer
+        box-sizing: border-box
+        position: absolute
+        left: 0
+        width: 100%
+        padding: 0 2.5%
+        white-space: nowrap
+        overflow: hidden
 
 div.category
   box-sizing: border-box
@@ -55,8 +65,8 @@ div.category
   height: 40vh
   display: inline-block
   background: lightgray
-  margin: 10px
-  font-size: 1.2em
+  margin: 0 10px
+  font-size: 1em
 
   &#cat-social
     background: url('img/category_bg/social.jpg')
@@ -77,14 +87,13 @@ div.category
 div.search
   $sb-height: 35px
   $lr-margin: 10px
+  $hi-color: rgba(255, 255, 255, 0.85)
   height: $sb-height
   width: 100%
   max-width: 700px
   display: inline-block
-  margin: 10vh $lr-margin 7vh
+  margin: 0 $lr-margin 1.5em
   text-align: left
-
-  $hi-color: rgba(255, 255, 255, 0.85)
 
   #search-left, input
     -moz-box-sizing: border-box
@@ -125,10 +134,8 @@ div.search
       background: $hi-color
 
 div.shortcut-bar-wrapper
-  width: inherit
-  height: 20vh
-  position: fixed
-  bottom: 0
+  width: 100%
+  margin: 1.5em 0 0
 
 div.shortcut-bar
   display: flex
