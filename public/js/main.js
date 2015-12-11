@@ -1,6 +1,19 @@
 var $searchInput;
 var $categoryViewer;
 
+var shortcutBarView = Backbone.View.extend({
+  initialize: function() {
+    this.render();
+  },
+  render: function() {
+    var shortcutBarTemplate = $('#shortcutBarTemplate').html();
+    var template = Handlebars.compile(shortcutBarTemplate);
+    var context = {};
+    var html = template(context);
+    this.$el.html(html);
+  }
+});
+
 var categoryView = Backbone.View.extend({
   initialize: function() {
     this.render();
@@ -22,6 +35,7 @@ $(document).ready(function() {
   $searchInput.focus(); //do first!
 
   var category_viewer_template = new categoryView({el: $('.category-viewer-placeholder') });
+  var shortcut_bar_template = new shortcutBarView({el: $('.shortcut-bar-wrapper') });
 
   $("input.search").on('blur', function() {
     $categoryViewer.fadeIn('fast');
