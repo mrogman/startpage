@@ -26,7 +26,7 @@ var Gateway = {
   showCategories: function() {
     Gateway.$categoryPlaceholder.animate({
       height: '50vh'
-    }, 200, function() {
+    }, 300, function() {
       Gateway.category_view.$categoryViewer.fadeIn('fast');
     });
   },
