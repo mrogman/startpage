@@ -7,44 +7,39 @@ html
 
   body
 
-    div class="main"
+    .main
 
-      div class="header"
+      .header
 
-      div class="content"
+      .content
 
-        div class="v-split" id="v-left"
+          .gateway
 
-        div class="v-split" id="v-middle"
-
-          div class="h-split gateway-container"
-
-            div class="search"
-              div id="search-left"
+            .search
+              #search-left
+                /img src="img/icon/search.png"
               input type="text" class="search" placeholder="Search DuckDuckGo..."
 
-            div class="gateway"
-              div class="s-box" id="cat-social"
+            .category-viewer
+              .category#cat-social
                 p Social
-              div class="s-box" id="cat-programming"
+              .category#cat-programming
                 p Programming
-              div class="s-box"
+              .category
                 p Tech
-              div class="s-box"
+              .category
                 p Medical
-              div class="s-box"
+              .category
                 p Entertainment
-              div class="s-box"
+              .category
                 p Misc
 
-          div class="h-split shortcut-bar-wrapper"
-            div class="widget-bar"
-              div class="wi-launcher" id="twitter-wi-launcher"
-              div class="wi-launcher" id="reddit-wi-launcher"
-              div class="wi-launcher" id="github-wi-launcher"
-              div class="wi-launcher" id="unnamed-wi-launcher"
-              div class="wi-launcher" id="unnamed-wi-launcher"
+            .shortcut-bar-wrapper
+              .shortcut-bar
+                .shortcut#sc-twitter
+                .shortcut#sc-reddit
+                .shortcut#sc-github
+                .shortcut#sc-unnamed
+                .shortcut#sc-unnamed
 
-        div class="v-split" id="v-right"
-
-      div class="footer"
+      .footer
