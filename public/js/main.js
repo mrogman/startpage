@@ -26,7 +26,7 @@ var Gateway = {
   showCategories: function() {
     Gateway.$categoryPlaceholder.animate({
       height: '50vh'
-    }, 400, function() {
+    }, 200, function() {
       Gateway.category_view.$categoryViewer.fadeIn('fast');
     });
   },
@@ -56,7 +56,6 @@ var shortcutBarView = Backbone.View.extend({
     $shortcutBar = $('.shortcut-bar');
     $shortcutBar
       .hide()
-      .delay(400)
       .fadeIn(600);
   },
   render: function() {
