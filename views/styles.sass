@@ -90,6 +90,7 @@ div.category
 div.search
   $sb-height: 35px
   $lr-margin: 10px
+  $lo-color: rgba(255, 255, 255, 0.5)
   $hi-color: rgba(255, 255, 255, 0.85)
   height: $sb-height
   width: 100%
@@ -97,6 +98,18 @@ div.search
   display: inline-block
   margin: 0 $lr-margin 1.5em
   text-align: left
+  background: $lo-color
+  &.search-focused
+    outline: none
+    background: $hi-color
+    width: calc(100% - #{$sb-height} - 2*#{$lr-margin})
+    transform: translateY(-3px)
+    -webkit-box-shadow: 5px 4px 5px -1px rgba(0,0,0,0.5)
+    -moz-box-shadow: 5px 4px 5px -1px rgba(0,0,0,0.5)
+    box-shadow: 5px 4px 5px -1px rgba(0,0,0,0.5)
+
+  &:hover
+    background: $hi-color
 
   #search-left, input
     -moz-box-sizing: border-box
@@ -108,33 +121,20 @@ div.search
     width: $sb-height
     height: 100%
     display: inline-block
-    background: $hi-color
 
   input
     box-sizing: border-box
     display: inline-block
     height: 100%
     width: 200px
-    background: rgba(255, 255, 255, 0.5)
     border: none
+    background: transparent
     font-size: 1em
     font-style: italic
     padding: 5px 10px
     color: #4d4d4d
     transition: width 0.3s, transform 0.3s
 
-
-    &:focus
-      outline: none
-      background: $hi-color
-      width: calc(100% - #{$sb-height} - 2*#{$lr-margin})
-      transform: translateY(-3px)
-      -webkit-box-shadow: 5px 4px 5px -1px rgba(0,0,0,0.5)
-      -moz-box-shadow: 5px 4px 5px -1px rgba(0,0,0,0.5)
-      box-shadow: 5px 4px 5px -1px rgba(0,0,0,0.5)
-
-    &:hover
-      background: $hi-color
 
 div.shortcut-bar-wrapper
   height: 10vh

@@ -5,9 +5,18 @@ var Gateway = {
     Gateway.getElements();
     Gateway.$categoryPlaceholder.css({ height: '0' });
 
-    Gateway.search.$input.on('blur', function() {
-      Gateway.showCategories();
-    });
+    Gateway.search.$input.on({
+        'focus': function() {
+          console.log('focused')
+          Gateway.search.$outer.addClass('search-focused', 200);
+        },
+        'blur': function() {
+          console.log('blurred')
+          Gateway.showCategories();
+          Gateway.search.$outer.removeClass('search-focused', 200);
+        }
+    })
+    .focus();
 
   },
 
@@ -85,7 +94,6 @@ var categoryView = Backbone.View.extend({
 $(document).ready(function() {
 
   $('input.search').focus(); //do first!
-
 
   Gateway.init();
 
