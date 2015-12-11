@@ -48,14 +48,17 @@ div.content
     vertical-align: middle
 
     .category-viewer-placeholder
-      height: 40vh
+      $cat-viewer-height: 40vh
+      $cat-viewer-ph-height: 50vh
+      height: $cat-viewer-ph-height
 
       .category-viewer
         box-sizing: border-box
         position: absolute
         left: 0
-        width: 100%
-        padding: 0 2.5%
+        width: 95%
+        margin: 0 2.5%
+        margin-top: calc((#{$cat-viewer-ph-height} - #{$cat-viewer-height})/2) //vertically center div within placeholder div
         white-space: nowrap
         overflow: hidden
 
