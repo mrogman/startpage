@@ -12,6 +12,32 @@ html
     script type="text/javascript" src="vendor/js/backbone.js"
     script type="text/javascript" src="js/main.js"
 
+    script#categoryViewTemplate type="text/x-handlebars-template"
+      .category-viewer
+        .category#cat-social
+          p Social
+        .category#cat-programming
+          p Programming
+        .category
+          p Tech
+        .category
+          p Medical
+        .category
+          p Entertainment
+        .category
+          p Misc
+
+    script#quickResultsTemplate type="text/x-handlebars-template"
+      .quick-results
+        .query-text
+        ul.top-hits
+          li Result 1
+          li Result 3
+          li Result 4
+          li Result 5
+          li Result 6
+          li Result 7
+
   body
 
     .main
@@ -27,21 +53,7 @@ html
                   i.fa class="fa-search"
                 input.search type="text" placeholder="Search DuckDuckGo..."
 
-            .category-viewer-placeholder
-              script#categoryViewTemplate type="text/x-handlebars-template"
-                .category-viewer
-                  .category#cat-social
-                    p Social
-                  .category#cat-programming
-                    p Programming
-                  .category
-                    p Tech
-                  .category
-                    p Medical
-                  .category
-                    p Entertainment
-                  .category
-                    p Misc
+            .middle
 
             .shortcut-bar-wrapper
               script#shortcutBarTemplate type="text/x-handlebars-template"
