@@ -109,7 +109,6 @@ div.search
   background: $lo-color
 
   &.search-focused
-    outline: none
     background: $hi-color
     width: 100%
     -webkit-box-shadow: 5px 4px 5px -1px rgba(0,0,0,0.5)
@@ -129,6 +128,8 @@ div.search
     width: $sb-height
     height: 100%
     display: inline-block
+    padding: 5px
+    font-size: 1.4rem
 
   input
     box-sizing: border-box
@@ -139,8 +140,9 @@ div.search
     background: transparent
     font-size: 1em
     font-style: italic
-    padding: 5px 10px
+    padding: 5px 0
     color: #4d4d4d
+    outline: none
 
 
 div.shortcut-bar-wrapper
