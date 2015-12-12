@@ -7,13 +7,16 @@ var Gateway = {
 
     Gateway.search.$input.on({
         'focus': function() {
-          console.log('focused')
           Gateway.search.$outer.addClass('search-focused', 200);
         },
         'blur': function() {
-          console.log('blurred')
           Gateway.showCategories();
           Gateway.search.$outer.removeClass('search-focused', 200);
+        },
+        'keypress': function(e) {
+          if(e.which == 13) {
+            Gateway.search.send();
+          }
         }
     })
     .focus();
@@ -50,6 +53,8 @@ var Gateway = {
 
     send: function() {
       //send search to DuckDuckGo on 'return' keydown
+      console.log('sending query to duckduckgo.com');
+      window.location.href = 'https://duckduckgo.com/?q=' + Gateway.search.$input.val();
     }
 
   }
@@ -57,7 +62,6 @@ var Gateway = {
 }
 
 var $shortcutBar;
-//var $categoryViewer;
 
 var shortcutBarView = Backbone.View.extend({
   initialize: function() {
@@ -96,9 +100,5 @@ $(document).ready(function() {
   $('input.search').focus(); //do first!
 
   Gateway.init();
-
-  //$("input.search").on('blur', function() {
-    //$categoryViewer.fadeIn('fast');
-  //});
 
 });
