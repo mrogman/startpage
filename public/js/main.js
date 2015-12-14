@@ -43,12 +43,17 @@ var Gateway = {
   },
 
   showCategories: function() {
-    if(Gateway.quick_results_view.$quickResultsDiv.is(':visible')) Gateway.quick_results_view.hideQuickResults();
-    Gateway.$middle.animate({
-      height: '50vh'
-    }, 300, function() {
-      Gateway.category_view.$categoryViewer.fadeIn('fast');
-    });
+    if(Gateway.quick_results_view.$quickResultsDiv.is(':visible')) {
+      Gateway.quick_results_view.hideQuickResults();
+      Gateway.category_view.$categoryViewer.delay(400).fadeIn('fast');
+    }
+    else {
+      Gateway.$middle.animate({
+        height: '50vh'
+      }, 300, function() {
+        Gateway.category_view.$categoryViewer.fadeIn('fast');
+      });
+    }
   },
 
   openQuickResults: function() {
@@ -155,7 +160,8 @@ var quickResultsView = Backbone.View.extend({
     Gateway.shortcut_bar_view.$shorcutBar.fadeIn('fast');
   },
 
-  destroy: function() {
+  destroy: function(e) {
+    e.preventDefault();
     this.hideQuickResults();
     Gateway.search.$input.val('');
     Gateway.search.activated = false;
