@@ -29,7 +29,9 @@ html
 
     script#quickResultsTemplate type="text/x-handlebars-template"
       .quick-results
-        p.query-text Search results for [query]
+        div.query-text Search results for [query]
+        span.close
+          i.fa class="fa-times"
         ul.top-hits
           li Result 1
           li Result 3

@@ -120,6 +120,8 @@ var quickResultsView = Backbone.View.extend({
   initialize: function() {
     this.render();
     this.$quickResultsDiv = $('.quick-results');
+    this.$queryText = $('.query-text');
+    this.$closeIcon = $('span.close');
     this.$quickResultsDiv.hide();
   },
 
@@ -130,6 +132,10 @@ var quickResultsView = Backbone.View.extend({
     var context = {};
     var html = template(context);
     this.$el.append(html);
+  },
+
+  events: {
+    'click .close': 'destroy'
   },
 
   showQuickResults: function() {
@@ -147,6 +153,14 @@ var quickResultsView = Backbone.View.extend({
       .add(Gateway.$container)
       .removeClass('qr-active', 400);
     Gateway.shortcut_bar_view.$shorcutBar.fadeIn('fast');
+  },
+
+  destroy: function() {
+    this.hideQuickResults();
+    Gateway.search.$input.val('');
+    Gateway.search.activated = false;
+    //clear existing quick results data
+
   }
 });
 
