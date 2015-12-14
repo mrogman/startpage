@@ -30,6 +30,7 @@ var Gateway = {
 
   getElements: function() {
     Gateway.$container = $('div.gateway')
+    Gateway.$top = $('.top');
     Gateway.$middle = $('.middle');
 
     Gateway.search.getElements();
@@ -79,8 +80,9 @@ var Gateway = {
 var shortcutBarView = Backbone.View.extend({
   initialize: function() {
     this.render();
-    this.$shortcutBar = $('.shortcut-bar');
-    this.$shortcutBar
+    this.$container = $('.shortcut-bar-wrapper');
+    this.$shorcutBar = $('.shortcut-bar');
+    this.$container
       .hide()
       .fadeIn(600);
   },
@@ -132,11 +134,19 @@ var quickResultsView = Backbone.View.extend({
 
   showQuickResults: function() {
     if(Gateway.category_view.$categoryViewer.is(':visible')) Gateway.category_view.hideCategoryViewer();
+    Gateway.$middle
+      .add(Gateway.$container)
+      .addClass('qr-active', 400);
+    Gateway.shortcut_bar_view.$shorcutBar.fadeOut('fast');
     this.$quickResultsDiv.fadeIn('fast');
   },
 
   hideQuickResults: function() {
     this.$quickResultsDiv.fadeOut('fast');
+    Gateway.$middle
+      .add(Gateway.$container)
+      .removeClass('qr-active', 400);
+    Gateway.shortcut_bar_view.$shorcutBar.fadeIn('fast');
   }
 });
 

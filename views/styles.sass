@@ -63,6 +63,12 @@ div.content
       $cat-viewer-ph-height: 50vh
       height: $cat-viewer-ph-height
 
+      &.qr-active
+        background-color: rgba(150, 150, 150, 0.5)
+        height: 70vh !important
+        padding: 10px
+        overflow: hidden
+
       .category-viewer
         box-sizing: border-box
         position: absolute
@@ -97,6 +103,25 @@ div.category
     margin: 0
     color: white
     background: rgba(50, 50, 50, 0.75)
+
+div.quick-results
+  text-align: left
+
+  .query-text
+    font-size: 1.5em
+    color: whitesmoke
+    padding: 5px
+    margin: 0
+
+  ul.top-hits
+    list-style: none
+    padding: 0
+
+    li
+      background-color: whitesmoke
+      margin: 0 0 5px
+      padding: 5px
+      height: 4em
 
 div.search
   $lo-color: rgba(255, 255, 255, 0.65)
