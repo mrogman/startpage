@@ -1,5 +1,6 @@
 $font-stack: sans-serif
 $primary-color: #333333
+$secondary-color: #737373
 
 $header-height: 30px
 $footer-height: 15vh
@@ -28,6 +29,22 @@ body,
   background: url('img/main/bg.jpg')
   background-size: cover
   background-position: center
+
+a
+  text-decoration: none
+  font-weight: normal
+
+  &:hover
+    text-decoration: underline
+
+h2
+  font-size: 1.2em
+  line-height: 1.2em
+  margin: 0
+  padding: 0
+
+  a
+    color: $primary-color
 
 .header
   display: block
@@ -134,6 +151,16 @@ div.quick-results
       margin: 0 0 5px
       padding: 5px
       height: 4em
+
+.result_snippet
+  font-size: 0.8em
+  padding: 0 2px
+
+.result_extras
+
+  .result_url
+    font-size: 0.8em
+    color: $secondary-color
 
 div.search
   $lo-color: rgba(255, 255, 255, 0.65)
