@@ -3,20 +3,25 @@ var Gateway = {
   init: function() {
     Gateway.renderViews();
     Gateway.getElements();
-    Gateway.$categoryPlaceholder.css({ height: '0' });
+    Gateway.$middle.css({ height: '0' });
 
     Gateway.search.$input.on({
         'focus': function() {
           Gateway.search.$outer.addClass('search-focused', 200);
+          if(!Gateway.quick_results_view.$quickResultsDiv.is(':visible') && Gateway.search.activated) {
+            Gateway.quick_results_view.showQuickResults();
+          }
         },
         'blur': function() {
           Gateway.showCategories();
           Gateway.search.$outer.removeClass('search-focused', 200);
         },
         'keypress': function(e) {
-          if(e.which == 13) {
+          if(e.which == 13) { //enter
             Gateway.search.send();
           }
+          //open quick results div if not activated
+          if(!Gateway.search.activated) Gateway.openQuickResults();
         }
     })
     .focus();
@@ -25,25 +30,41 @@ var Gateway = {
 
   getElements: function() {
     Gateway.$container = $('div.gateway')
-    Gateway.$categoryPlaceholder = $('.category-viewer-placeholder');
+    Gateway.$top = $('.top');
+    Gateway.$middle = $('.middle');
 
     Gateway.search.getElements();
   },
 
   renderViews: function() {
-    Gateway.category_view = new categoryView({el: $('.category-viewer-placeholder') });
-    Gateway.shortcut_bar_view = new shortcutBarView({el: $('.shortcut-bar-wrapper') });
+    Gateway.category_view = new categoryView({ el: $('.middle') });
+    Gateway.shortcut_bar_view = new shortcutBarView({ el: $('.shortcut-bar-wrapper') });
+    Gateway.quick_results_view = new quickResultsView({ el: $('.middle') });
   },
 
   showCategories: function() {
-    Gateway.$categoryPlaceholder.animate({
-      height: '50vh'
-    }, 300, function() {
-      Gateway.category_view.$categoryViewer.fadeIn('fast');
-    });
+    if(Gateway.quick_results_view.$quickResultsDiv.is(':visible')) {
+      Gateway.quick_results_view.hideQuickResults();
+      Gateway.category_view.$categoryViewer.delay(400).fadeIn('fast');
+    }
+    else {
+      Gateway.$middle.animate({
+        height: '50vh'
+      }, 300, function() {
+        Gateway.category_view.$categoryViewer.fadeIn('fast');
+      });
+    }
+  },
+
+  openQuickResults: function() {
+    Gateway.search.activated = true;
+    if(Gateway.category_view.$categoryViewer.is(':visible')) Gateway.category_view.hideCategoryViewer();
+    Gateway.quick_results_view.showQuickResults();
   },
 
   search: {
+
+    activated: false, //quick result div open
 
     getElements: function(){
       this.$outer = $('div.search');
@@ -61,13 +82,12 @@ var Gateway = {
 
 }
 
-var $shortcutBar;
-
 var shortcutBarView = Backbone.View.extend({
   initialize: function() {
     this.render();
-    $shortcutBar = $('.shortcut-bar');
-    $shortcutBar
+    this.$container = $('.shortcut-bar-wrapper');
+    this.$shorcutBar = $('.shortcut-bar');
+    this.$container
       .hide()
       .fadeIn(600);
   },
@@ -76,7 +96,7 @@ var shortcutBarView = Backbone.View.extend({
     var template = Handlebars.compile(shortcutBarTemplate);
     var context = {};
     var html = template(context);
-    this.$el.html(html);
+    this.$el.append(html);
   }
 });
 
@@ -87,13 +107,70 @@ var categoryView = Backbone.View.extend({
     this.$categoryViewer.hide();
   },
   render: function() {
+    console.log('rendering category viewer');
     var categoryViewTemplate = $('#categoryViewTemplate').html();
+    console.log('categoryViewTemplate: ' + categoryViewTemplate);
     var template = Handlebars.compile(categoryViewTemplate);
     var context = {};
     var html = template(context);
-    this.$el.html(html);
+    this.$el.append(html);
   },
+
+  hideCategoryViewer: function() {
+    this.$categoryViewer.fadeOut('fast');
+  }
 });
+
+var quickResultsView = Backbone.View.extend({
+  initialize: function() {
+    this.render();
+    this.$quickResultsDiv = $('.quick-results');
+    this.$queryText = $('.query-text');
+    this.$closeIcon = $('span.close');
+    this.$quickResultsDiv.hide();
+  },
+
+  render: function() {
+    var quickResultsTemplate = $('#quickResultsTemplate').html();
+    console.log('quickResultsTemplate: ' + quickResultsTemplate);
+    var template = Handlebars.compile(quickResultsTemplate);
+    var context = {};
+    var html = template(context);
+    this.$el.append(html);
+  },
+
+  events: {
+    'click .close': 'destroy'
+  },
+
+  showQuickResults: function() {
+    if(Gateway.category_view.$categoryViewer.is(':visible')) Gateway.category_view.hideCategoryViewer();
+    Gateway.$middle
+      .add(Gateway.$container)
+      .addClass('qr-active', 400);
+    Gateway.shortcut_bar_view.$shorcutBar.fadeOut('fast');
+    this.$quickResultsDiv.fadeIn('fast');
+  },
+
+  hideQuickResults: function() {
+    this.$quickResultsDiv.fadeOut('fast');
+    Gateway.$middle
+      .add(Gateway.$container)
+      .removeClass('qr-active', 400);
+    Gateway.shortcut_bar_view.$shorcutBar.fadeIn('fast');
+  },
+
+  destroy: function(e) {
+    e.preventDefault();
+    this.hideQuickResults();
+    Gateway.search.$input.val('');
+    Gateway.search.activated = false;
+    //clear existing quick results data
+
+  }
+});
+
+
 
 $(document).ready(function() {
 

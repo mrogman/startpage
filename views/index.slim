@@ -12,6 +12,41 @@ html
     script type="text/javascript" src="vendor/js/backbone.js"
     script type="text/javascript" src="js/main.js"
 
+    script#categoryViewTemplate type="text/x-handlebars-template"
+      .category-viewer
+        .category#cat-social
+          p Social
+        .category#cat-programming
+          p Programming
+        .category
+          p Tech
+        .category
+          p Medical
+        .category
+          p Entertainment
+        .category
+          p Misc
+
+    script#quickResultsTemplate type="text/x-handlebars-template"
+      .quick-results
+        div.query-text Search results for [query]
+        span.close
+          i.fa class="fa-times"
+        ul.top-hits
+          li
+            h2.result_title
+              a.result_a href="#" Result 1
+            div.result_snippet
+              This is an example of a short description for the result destination. It will be approximately this long...
+            div.result_extras
+              div.result_extras_url
+                  span.result_icon
+                  a.result_url href="#" result1.com
+          li Result 2
+          li Result 3
+          li Result 4
+          li Result 5
+
   body
 
     .main
@@ -27,21 +62,7 @@ html
                   i.fa class="fa-search"
                 input.search type="text" placeholder="Search DuckDuckGo..."
 
-            .category-viewer-placeholder
-              script#categoryViewTemplate type="text/x-handlebars-template"
-                .category-viewer
-                  .category#cat-social
-                    p Social
-                  .category#cat-programming
-                    p Programming
-                  .category
-                    p Tech
-                  .category
-                    p Medical
-                  .category
-                    p Entertainment
-                  .category
-                    p Misc
+            .middle
 
             .shortcut-bar-wrapper
               script#shortcutBarTemplate type="text/x-handlebars-template"

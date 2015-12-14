@@ -1,5 +1,6 @@
 $font-stack: sans-serif
 $primary-color: #333333
+$secondary-color: #737373
 
 $header-height: 30px
 $footer-height: 15vh
@@ -28,6 +29,22 @@ body,
   background: url('img/main/bg.jpg')
   background-size: cover
   background-position: center
+
+a
+  text-decoration: none
+  font-weight: normal
+
+  &:hover
+    text-decoration: underline
+
+h2
+  font-size: 1.2em
+  line-height: 1.2em
+  margin: 0
+  padding: 0
+
+  a
+    color: $primary-color
 
 .header
   display: block
@@ -58,10 +75,16 @@ div.content
       padding: 0 $lr-margin
       margin: 0 0 1.5em
 
-    .category-viewer-placeholder
+    .middle
       $cat-viewer-height: 40vh
       $cat-viewer-ph-height: 50vh
       height: $cat-viewer-ph-height
+
+      &.qr-active
+        background-color: rgba(150, 150, 150, 0.5)
+        height: 70vh !important
+        padding: 10px
+        overflow: hidden
 
       .category-viewer
         box-sizing: border-box
@@ -97,6 +120,47 @@ div.category
     margin: 0
     color: white
     background: rgba(50, 50, 50, 0.75)
+
+div.quick-results
+  text-align: left
+
+  .query-text
+    display: inline
+    font-size: 1.5em
+    color: whitesmoke
+    padding: 5px
+    margin: 0
+
+  span.close
+    display: inline
+    float: right
+    font-size: 1.3em
+    line-height: 1.5em
+    color: whitesmoke
+    opacity: 0.5
+
+    &:hover
+      opacity: 1
+
+  ul.top-hits
+    list-style: none
+    padding: 0
+
+    li
+      background-color: whitesmoke
+      margin: 0 0 5px
+      padding: 5px
+      height: 4em
+
+.result_snippet
+  font-size: 0.8em
+  padding: 0 2px
+
+.result_extras
+
+  .result_url
+    font-size: 0.8em
+    color: $secondary-color
 
 div.search
   $lo-color: rgba(255, 255, 255, 0.65)
