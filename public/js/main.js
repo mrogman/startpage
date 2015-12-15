@@ -44,7 +44,10 @@ var Gateway = {
       Gateway.shortcut_bar_view = new shortcutBarView({ el: $('.shortcut-bar-wrapper') });
     });
 
+    Gateway.categories_collection = new CategoriesCollection();
+    Gateway.categories_collection.fetch();
     Gateway.category_view = new categoryView({ el: $('.middle') });
+
     Gateway.quick_results_view = new quickResultsView({ el: $('.middle') });
   },
 
@@ -83,9 +86,7 @@ var Gateway = {
       console.log('sending query to duckduckgo.com');
       window.location.href = 'https://duckduckgo.com/?q=' + Gateway.search.$input.val();
     }
-
   }
-
 }
 
 var shortcutBarView = Backbone.View.extend({
@@ -188,6 +189,20 @@ var Shortcut = Backbone.Model.extend({
 var ShortcutsCollection = Backbone.Collection.extend({
   model: Shortcut,
   url:'/api/shortcuts/',
+});
+
+var Category = Backbone.Model.extend({
+  urlroot: '/api/shortcuts/',
+  defaults: {
+    name: '',
+    background: '',
+    links: []
+  }
+});
+
+var CategoriesCollection = Backbone.Collection.extend({
+  model: Category,
+  url: '/api/categories/'
 });
 
 $(document).ready(function() {
