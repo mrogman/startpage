@@ -76,20 +76,35 @@ get '/api/categories/' do
   settings.db[:categories].find.to_a.to_json
 end
 
-post '/api/categories/:name' do
-  # add a new category
+## add a new category
+post '/api/categories/' do
+  category_links = [text: params[:category_link_text],
+                    href: params[:category_link_href]]
+  entry = { name:       params[:shortcut_name],
+            background: params[:shortcut_img],
+            links:      category_links }
+  # insert
+  settings.db[:categories].insert_one(entry)
 end
 
-post '/api/categories/:name/links' do
-  # add a new link to a category
+## add a new link to a category
+patch '/api/categories/:id/links' do
+  categories = settings.db[:categories]
+  new_link = [text: params[:category_link_text],
+              href: params[:category_link_href]]
+  entry = categories.find(id: :id)
+  # update
+  entry.replace_one(links: new_link)
 end
 
-delete '/api/categories/:name' do
-  # delete a category
+## delete a category
+delete '/api/categories/:id' do
+  settings.db[:categories].delete_one(id: :id)
 end
 
-delete '/api/categories/:name/links/:id' do
-  # delete a link within a category
+## delete a link within a category
+delete '/api/categories/:id/links/:link_id' do
+  # do later
 end
 
 get '/api/tabs/:name' do
