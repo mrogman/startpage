@@ -37,8 +37,14 @@ var Gateway = {
   },
 
   renderViews: function() {
+    Gateway.shortcuts_collection = new ShortcutsCollection();
+    var getShortcuts = Gateway.shortcuts_collection.fetch();
+
+    getShortcuts.done(function() {
+      Gateway.shortcut_bar_view = new shortcutBarView({ el: $('.shortcut-bar-wrapper') });
+    });
+
     Gateway.category_view = new categoryView({ el: $('.middle') });
-    Gateway.shortcut_bar_view = new shortcutBarView({ el: $('.shortcut-bar-wrapper') });
     Gateway.quick_results_view = new quickResultsView({ el: $('.middle') });
   },
 
@@ -170,7 +176,19 @@ var quickResultsView = Backbone.View.extend({
   }
 });
 
+var Shortcut = Backbone.Model.extend({
+  urlroot: '/api/shortcuts/',
+  defaults: {
+    name: 'unnamed',
+    img: '',
+    href: '#'
+  }
+});
 
+var ShortcutsCollection = Backbone.Collection.extend({
+  model: Shortcut,
+  url:'/api/shortcuts/',
+});
 
 $(document).ready(function() {
 
