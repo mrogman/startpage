@@ -43,6 +43,7 @@ configure do
   end
 end
 
+## application root
 get '/' do
   slim :index
 end
@@ -51,21 +52,27 @@ get '/styles.css' do
   sass :styles, :style => :expanded
 end
 
+## get all shortcut data
 get '/api/shortcuts/' do
-  # get all shortcut data
   settings.db[:shortcuts].find.to_a.to_json
 end
 
-post '/api/shortcuts/:name' do
-  # add a new shortcut
+## add a new shortcut
+post '/api/shortcuts/' do
+  entry = { name: params[:shortcut_name],
+            img:  params[:shortcut_img],
+            href: params[:shortcut_href] }
+  # insert
+  settings.db[:shortcuts].insert_one(entry)
 end
 
-delete '/api/shortcuts/:name' do
-  # delete shortcut
+## delete shortcut
+delete '/api/shortcuts/:id' do
+  settings.db[:shortcuts].delete_one(name: :id)
 end
 
+## get list of categories and associated data
 get '/api/categories/' do
-  # get list of categories and associated data
   settings.db[:categories].find.to_a.to_json
 end
 
