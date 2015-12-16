@@ -5,11 +5,11 @@ templates['shortcutBar'] = template({"1":function(container,depth0,helpers,parti
 
   return "    <div class=\"shortcut\" id=\"sc-"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.attributes : depth0)) != null ? stack1.name : stack1), depth0))
-    + "\" href=\""
+    + "\">\n      <a href=\""
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.attributes : depth0)) != null ? stack1.href : stack1), depth0))
-    + "\">\n      <img src=\""
+    + "\">\n        <img src=\""
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.attributes : depth0)) != null ? stack1.img : stack1), depth0))
-    + "\" />\n    </div>\n";
+    + "\" />\n      </a>\n    </div>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 

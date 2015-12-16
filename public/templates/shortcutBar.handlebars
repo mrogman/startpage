@@ -1,7 +1,9 @@
 <div class="shortcut-bar">
   {{#each models}}
-    <div class="shortcut" id="sc-{{attributes.name}}" href="{{attributes.href}}">
-      <img src="{{attributes.img}}" />
+    <div class="shortcut" id="sc-{{attributes.name}}">
+      <a href="{{attributes.href}}">
+        <img src="{{attributes.img}}" />
+      </a>
     </div>
   {{/each}}
 </div>
