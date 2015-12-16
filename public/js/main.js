@@ -41,7 +41,7 @@ var Gateway = {
     var getShortcuts = Gateway.shortcuts_collection.fetch();
 
     getShortcuts.done(function() {
-      Gateway.shortcut_bar_view = new shortcutBarView({ el: $('.shortcut-bar-wrapper') });
+      Gateway.shortcut_bar_view = new shortcutBarView({ el: $('.shortcut-bar-wrapper'), collection: Gateway.shortcuts_collection });
     });
 
     Gateway.categories_collection = new CategoriesCollection();
@@ -98,11 +98,9 @@ var shortcutBarView = Backbone.View.extend({
       .hide()
       .fadeIn(600);
   },
+  template: Handlebars.templates.shortcutBar,
   render: function() {
-    var shortcutBarTemplate = $('#shortcutBarTemplate').html();
-    var template = Handlebars.compile(shortcutBarTemplate);
-    var context = {};
-    var html = template(context);
+    var html = this.template(this.collection);
     this.$el.append(html);
   }
 });
