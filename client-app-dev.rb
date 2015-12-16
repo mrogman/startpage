@@ -16,7 +16,7 @@ configure do
   if db[:shortcuts].find.to_a.empty?
     puts 'loading example data for shortcuts collection'
     db[:shortcuts].insert_many [
-      { name: 'twitter', img: 'https://www.iconfinder.com/icons/107170/circle_color_twitter_icon', href: 'https://twitter.com' },
+      { name: 'twitter', img: 'http://uxrepo.com/static/icon-sets/dr-slash/svg/twitter.svg', href: 'https://twitter.com' },
       { name: 'github', img: 'https://image.freepik.com/iconos-gratis/logo-github_318-53553.jpg', href: 'https://github.com/mrogman' },
       { name: 'reddit', img: 'http://mediaserver.pulse2.com/uploads/2009/10/reddit-logo.png', href: 'https://reddit.com' },
     ]

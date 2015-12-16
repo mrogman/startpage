@@ -38,15 +38,18 @@ var Gateway = {
 
   renderViews: function() {
     Gateway.shortcuts_collection = new ShortcutsCollection();
-    var getShortcuts = Gateway.shortcuts_collection.fetch();
+    var fetchShortcuts = Gateway.shortcuts_collection.fetch();
 
-    getShortcuts.done(function() {
-      Gateway.shortcut_bar_view = new shortcutBarView({ el: $('.shortcut-bar-wrapper') });
+    fetchShortcuts.done(function() {
+      Gateway.shortcut_bar_view = new shortcutBarView({ el: $('.shortcut-bar-wrapper'), collection: Gateway.shortcuts_collection });
     });
 
     Gateway.categories_collection = new CategoriesCollection();
-    Gateway.categories_collection.fetch();
-    Gateway.category_view = new categoryView({ el: $('.middle') });
+    var fetchCategories = Gateway.categories_collection.fetch();
+
+    fetchCategories.done(function() {
+      Gateway.category_view = new categoryView({ el: $('.middle'), collection: Gateway.categories_collection });
+    });
 
     Gateway.quick_results_view = new quickResultsView({ el: $('.middle') });
   },
@@ -83,7 +86,6 @@ var Gateway = {
 
     send: function() {
       //send search to DuckDuckGo on 'return' keydown
-      console.log('sending query to duckduckgo.com');
       window.location.href = 'https://duckduckgo.com/?q=' + Gateway.search.$input.val();
     }
   }
@@ -98,11 +100,9 @@ var shortcutBarView = Backbone.View.extend({
       .hide()
       .fadeIn(600);
   },
+  template: Handlebars.templates.shortcutBar,
   render: function() {
-    var shortcutBarTemplate = $('#shortcutBarTemplate').html();
-    var template = Handlebars.compile(shortcutBarTemplate);
-    var context = {};
-    var html = template(context);
+    var html = this.template(this.collection);
     this.$el.append(html);
   }
 });
@@ -113,13 +113,9 @@ var categoryView = Backbone.View.extend({
     this.$categoryViewer = $('.category-viewer');
     this.$categoryViewer.hide();
   },
+  template: Handlebars.templates.categoryView,
   render: function() {
-    console.log('rendering category viewer');
-    var categoryViewTemplate = $('#categoryViewTemplate').html();
-    console.log('categoryViewTemplate: ' + categoryViewTemplate);
-    var template = Handlebars.compile(categoryViewTemplate);
-    var context = {};
-    var html = template(context);
+    var html = this.template(this.collection);
     this.$el.append(html);
   },
 
@@ -139,7 +135,6 @@ var quickResultsView = Backbone.View.extend({
 
   render: function() {
     var quickResultsTemplate = $('#quickResultsTemplate').html();
-    console.log('quickResultsTemplate: ' + quickResultsTemplate);
     var template = Handlebars.compile(quickResultsTemplate);
     var context = {};
     var html = template(context);
