@@ -25,7 +25,6 @@ var Gateway = {
         }
     })
     .focus();
-
   },
 
   getElements: function() {
@@ -37,27 +36,35 @@ var Gateway = {
   },
 
   renderViews: function() {
+
+    //fetch shortcuts and render view
     Gateway.shortcuts_collection = new ShortcutsCollection();
     var fetchShortcuts = Gateway.shortcuts_collection.fetch();
-
     fetchShortcuts.done(function() {
-      Gateway.shortcut_bar_view = new shortcutBarView({ el: $('.shortcut-bar-wrapper'), collection: Gateway.shortcuts_collection });
+      Gateway.shortcut_bar_view = new shortcutBarView({
+        el: $('.shortcut-bar-wrapper'),
+        collection: Gateway.shortcuts_collection
+      });
     });
 
+    //fetch categories and render view
     Gateway.categories_collection = new CategoriesCollection();
     var fetchCategories = Gateway.categories_collection.fetch();
-
     fetchCategories.done(function() {
-      Gateway.category_view = new categoryView({ el: $('.middle'), collection: Gateway.categories_collection });
+      Gateway.category_view = new categoryView({
+        el: $('.middle'),
+        collection: Gateway.categories_collection
+      });
     });
 
+    //render quick results view
     Gateway.quick_results_view = new quickResultsView({ el: $('.middle') });
   },
 
   showCategories: function() {
     if(Gateway.quick_results_view.$quickResultsDiv.is(':visible')) {
       Gateway.quick_results_view.hideQuickResults();
-      Gateway.category_view.$categoryViewer.delay(400).fadeIn('fast');
+      Gateway.category_view.$categoryViewer.delay(200).fadeIn(800);
     }
     else {
       Gateway.$middle.animate({
@@ -158,7 +165,7 @@ var quickResultsView = Backbone.View.extend({
     this.$quickResultsDiv.fadeOut('fast');
     Gateway.$middle
       .add(Gateway.$container)
-      .removeClass('qr-active', 400);
+      .removeClass('qr-active', 200);
     Gateway.shortcut_bar_view.$shorcutBar.fadeIn('fast');
   },
 
