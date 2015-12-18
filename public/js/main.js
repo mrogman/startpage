@@ -184,10 +184,16 @@ var Shortcut = Backbone.Model.extend({
   defaults: {
     name: '',
     type: '',  // 'image' or 'font'
-    class: '', // class name to append. useful for font classes
-    hoverColor: '#FFFFFF'
+    fontClass: '',
+    hoverColor: '#FFFFFF',
     img: '',
     href: '#'
+  },
+  isImage: function() {
+    return this.attributes.type === 'image';
+  },
+  isFontIcon: function() {
+    return this.attributes.type === 'font';
   }
 });
 
