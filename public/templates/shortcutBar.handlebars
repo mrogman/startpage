@@ -4,7 +4,7 @@
       <a href="{{attributes.href}}">
         {{#if this.isImage}}
           <img src="{{attributes.img}}" />
-        {{else this.isFontIcon}}
+        {{else if this.isFontIcon}}
           <i class="fa {{attributes.fontClass}}"
           onmouseover="Gateway.shortcut_bar_view.scFontHover($(this),'{{attributes.hoverColor}}')">
           </i>
