@@ -182,7 +182,10 @@ var quickResultsView = Backbone.View.extend({
 var Shortcut = Backbone.Model.extend({
   urlroot: '/api/shortcuts/',
   defaults: {
-    name: 'unnamed',
+    name: '',
+    type: '',  // 'image' or 'font'
+    class: '', // class name to append. useful for font classes
+    hoverColor: '#FFFFFF'
     img: '',
     href: '#'
   }
