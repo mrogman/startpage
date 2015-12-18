@@ -194,7 +194,7 @@ var ShortcutsCollection = Backbone.Collection.extend({
 });
 
 var Category = Backbone.Model.extend({
-  urlroot: '/api/shortcuts/',
+  urlroot: '/api/categories/',
   defaults: {
     name: '',
     background: '',
