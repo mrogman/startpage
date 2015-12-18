@@ -25,9 +25,9 @@ templates['shortcutBar'] = template({"1":function(container,depth0,helpers,parti
 
   return "          <i class=\"fa "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.attributes : depth0)) != null ? stack1.fontClass : stack1), depth0))
-    + "\"\n          onmouseover=\"scFontHover("
+    + "\"\n          onmouseover=\"Gateway.shortcut_bar_view.scFontHover($(this),'"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.attributes : depth0)) != null ? stack1.hoverColor : stack1), depth0))
-    + ")\"\n          onmouseout=\"scFontOut()\"></i>\n        ";
+    + "')\">\n          </i>\n        ";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 

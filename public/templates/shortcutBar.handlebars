@@ -6,8 +6,8 @@
           <img src="{{attributes.img}}" />
         {{else this.isFontIcon}}
           <i class="fa {{attributes.fontClass}}"
-          onmouseover="scFontHover({{attributes.hoverColor}})"
-          onmouseout="scFontOut()"></i>
+          onmouseover="Gateway.shortcut_bar_view.scFontHover($(this),'{{attributes.hoverColor}}')">
+          </i>
         {{/if}}
       </a>
     </div>
