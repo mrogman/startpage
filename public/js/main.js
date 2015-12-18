@@ -103,14 +103,31 @@ var shortcutBarView = Backbone.View.extend({
     this.render();
     this.$container = $('.shortcut-bar-wrapper');
     this.$shorcutBar = $('.shortcut-bar');
+    this.$shortcutIcons = $('.shortcut i');
     this.$container
       .hide()
       .fadeIn(600);
+    this.$shortcutIcons.on('mouseout', this.scFontOut);
+
   },
   template: Handlebars.templates.shortcutBar,
   render: function() {
     var html = this.template(this.collection);
     this.$el.append(html);
+  },
+  events: {
+    //'mouseout i': 'scFontOut'
+  },
+  scFontHover: function(elem, hoverColor) {
+    elem.animate({
+      color: hoverColor
+    }, 200);
+  },
+  scFontOut: function() {
+    console.log('mouseout icon');
+    $(this).animate({
+      color: 'lightgray'
+    });
   }
 });
 
@@ -182,9 +199,18 @@ var quickResultsView = Backbone.View.extend({
 var Shortcut = Backbone.Model.extend({
   urlroot: '/api/shortcuts/',
   defaults: {
-    name: 'unnamed',
+    name: '',
+    type: '',  // 'image' or 'font'
+    fontClass: '',
+    hoverColor: '#FFFFFF',
     img: '',
     href: '#'
+  },
+  isImage: function() {
+    return this.attributes.type === 'image';
+  },
+  isFontIcon: function() {
+    return this.attributes.type === 'font';
   }
 });
 
