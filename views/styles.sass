@@ -47,11 +47,19 @@ h2
     color: $primary-color
 
 .header
-  display: block
+  display: table
   position: fixed
   height: $header-height
   width: 100%
   background: rgba(100, 100, 100, 0.5)
+
+  .header-left
+    display: table-cell
+
+  .header-tab
+    display: table-cell
+    max-width: 200px
+    width: 25%
 
 div.content
   display: table
@@ -249,4 +257,3 @@ div.shortcut-bar
     right: 0
     position: absolute
     z-index: -1
-
