@@ -16,9 +16,10 @@ configure do
   if db[:shortcuts].find.to_a.empty?
     puts 'loading example data for shortcuts collection'
     db[:shortcuts].insert_many [
-      { name: 'reddit', type: 'font', fontClass: 'fa-reddit-alien', hoverColor: '#F22700', img: '', href: 'https://reddit.com' },
+      { name: 'reddit', type: 'font', fontClass: 'fa-reddit-alien', hoverColor: '#FFFF99', img: '', href: 'https://reddit.com' },
       { name: 'twitter', type: 'font', fontClass: 'fa-twitter', hoverColor: '#3399ff', img: '', href: 'https://twitter.com' },
       { name: 'github', type: 'font', fontClass: 'fa-github-alt', hoverColor: '#60DA11', img: '', href: 'https://github.com/mrogman' },
+      { name: 'netflix', type: 'font', fontClass: 'fa-ticket', hoverColor: '#FF5050', img: '', href: 'https://netflix.com' },
       { name: 'soundcloud', type: 'font', fontClass: 'fa-soundcloud', hoverColor: '#FF6400', img: '', href: 'https://soundcloud.com/stream' }
     ]
   end
