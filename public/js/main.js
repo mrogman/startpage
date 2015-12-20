@@ -22,7 +22,11 @@ var Gateway = {
             Gateway.search.send();
           }
           //open quick results div if not activated
-          if(!Gateway.search.activated) Gateway.openQuickResults();
+          if(!Gateway.search.activated) {
+            var clock = Gateway.clock.$container;
+            if(clock.is(':visible')) clock.remove();
+            Gateway.openQuickResults();
+          }
         }
     })
     .focus();
