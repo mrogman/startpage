@@ -12,6 +12,7 @@ html
     script type="text/javascript" src="vendor/js/backbone.js"
     script type="text/javascript" src="js/shortcutBar.tpl.js"
     script type="text/javascript" src="js/categoryView.tpl.js"
+    script type="text/javascript" src="js/clock.js"
     script type="text/javascript" src="js/main.js"
 
     script#quickResultsTemplate type="text/x-handlebars-template"
@@ -64,6 +65,16 @@ html
 
           .gateway
             .top
+              .clock
+                #Date
+                ul
+                  li#hours
+                  li#point
+                    | :
+                  li#min
+                  li#point
+                    | :
+                  li#sec
               .search
                 #search-left
                   i.fa class="fa-search"

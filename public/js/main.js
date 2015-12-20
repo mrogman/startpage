@@ -239,4 +239,6 @@ $(document).ready(function() {
 
   Gateway.init();
 
+  runClock();
+
 });

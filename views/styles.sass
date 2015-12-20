@@ -75,6 +75,9 @@ h2
       line-height: $icon-size
       padding: 0 0 0 20px
 
+      &:hover
+        color: white
+
   .tab-block
     height: 100%
     width: 80%
@@ -138,6 +141,34 @@ div.content
         margin-top: calc((#{$cat-viewer-ph-height} - #{$cat-viewer-height})/2) //vertically center div within placeholder div
         white-space: nowrap
         overflow: hidden
+
+.clock
+  width: 80%
+  margin: 0 auto
+  padding: 10px
+  color: #fff
+
+  #Date
+    font-size: 1.5em
+    text-align: center
+    text-shadow: 0 0 5px #00c6ff
+
+  ul
+    width: inherit
+    margin: 0 auto
+    padding: 0px
+    list-style: none
+    text-align: center
+
+    li
+      display: inline
+      font-size: 3em
+      text-align: center
+      text-shadow: 0 0 5px #00c6ff
+
+  #point
+    position: relative
+    padding: 0 5px
 
 div.category
   box-sizing: border-box
@@ -278,6 +309,7 @@ div.shortcut-bar
     i
       font-size: $sc-size - 1vh
       color: lightgray
+      text-shadow: 1px 1px 10px #1A1A1A
 
 .footer
   position: fixed
