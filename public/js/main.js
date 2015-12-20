@@ -1,9 +1,13 @@
+var $cvTriggerZone; //category view trigger zone (opens category view)
+var cvTriggerZone_clicked = false;
+
 var Gateway = {
 
   init: function() {
     Gateway.renderViews();
     Gateway.getElements();
     Gateway.$middle.css({ height: '0' });
+    $cvTriggerZone = $('div.main').add($('div.gateway'));
 
     Gateway.search.$input.on({
         'focus': function() {
@@ -13,9 +17,16 @@ var Gateway = {
           }
         },
         'blur': function() {
-          Gateway.clock.$container.remove();
-          Gateway.showCategories();
-          Gateway.search.$outer.removeClass('search-focused', 200);
+          //show category view if clicked within the trigger zone
+          setTimeout(function() { //brief pause to allow boolean to be set
+            if(cvTriggerZone_clicked) {
+              //show category view
+              Gateway.clock.$container.remove();
+              Gateway.showCategories();
+              Gateway.search.$outer.removeClass('search-focused', 200);
+            }
+          }, 50);
+
         },
         'keyup': function(e) {
           if(e.which == 13) { //enter
@@ -33,6 +44,21 @@ var Gateway = {
         }
     })
     .focus();
+
+    /* briefly indicate that the trigger zone has been clicked
+     * for the search bar blur event handler to evaluate.
+     * Note: event handler detached in Gateway.showCategories() */
+    $cvTriggerZone.on('click', function(e) {
+      if(e.target === this) { //exclude child elements
+        console.log('clicked category view trigger zone')
+        cvTriggerZone_clicked = true
+        setTimeout(function() {
+          cvTriggerZone_clicked = false //reset to false
+        }, 100);
+      }
+      //keep search bar focused if not trigger zone not clicked
+      else Gateway.search.$input.focus();
+    });
   },
 
   getElements: function() {
@@ -83,6 +109,8 @@ var Gateway = {
         Gateway.category_view.$categoryViewer.fadeIn('fast');
       });
     }
+    //disable category view trigger zone click event once open
+    $cvTriggerZone.off('click');
   },
 
   openQuickResults: function() {
@@ -157,7 +185,10 @@ var categoryView = Backbone.View.extend({
 
   hideCategoryViewer: function() {
     this.$categoryViewer.fadeOut('fast');
-  }
+  },
+
+  isVisible: function() { return this.$categoryViewer.is(':visible') }
+
 });
 
 var quickResultsView = Backbone.View.extend({
