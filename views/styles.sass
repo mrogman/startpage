@@ -75,6 +75,9 @@ h2
       line-height: $icon-size
       padding: 0 0 0 20px
 
+      &:hover
+        color: white
+
   .tab-block
     height: 100%
     width: 80%
@@ -112,7 +115,6 @@ div.content
 
     .top
       box-sizing: border-box
-      height: $sb-height
       width: 100%
       text-align: left
       padding: 0 $lr-margin
@@ -138,6 +140,34 @@ div.content
         margin-top: calc((#{$cat-viewer-ph-height} - #{$cat-viewer-height})/2) //vertically center div within placeholder div
         white-space: nowrap
         overflow: hidden
+
+.clock
+  width: 80%
+  margin: -5vh auto 5vh
+  color: #fff
+  opacity: 0.75
+
+  #Date
+    font-size: 1.5em
+    text-align: center
+    text-shadow: 0 0 5px #00c6ff
+
+  ul
+    width: inherit
+    margin: 0 auto
+    padding: 0px
+    list-style: none
+    text-align: center
+
+    li
+      display: inline
+      font-size: 3em
+      text-align: center
+      text-shadow: 0 0 5px #00c6ff
+
+  #point
+    position: relative
+    padding: 0 5px
 
 div.category
   box-sizing: border-box
@@ -205,7 +235,7 @@ div.quick-results
 div.search
   $lo-color: rgba(255, 255, 255, 0.65)
   $hi-color: rgba(255, 255, 255, 0.85)
-  height: 100%
+  height: $sb-height
   width: 50%
   max-width: 700px
   display: inline-block
@@ -278,6 +308,7 @@ div.shortcut-bar
     i
       font-size: $sc-size - 1vh
       color: lightgray
+      text-shadow: 1px 1px 10px #1A1A1A
 
 .footer
   position: fixed
