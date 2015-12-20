@@ -40,7 +40,10 @@ configure do
           { text: 'Hacker News', href: 'https://news.ycombinator.com' },
           { text: 'Github', href: 'https://github.com' }
         ]
-      }
+      },
+      { name: 'Technology', background: 'http://mobiletech.us/images/Motherboard.jpg', links: [] },
+      { name: 'News', background: 'http://newspaper-publishers.regionaldirectory.us/newspaper-720.jpg', links: [] },
+      { name: 'Entertainment', background: 'http://www.latinabloggersconnect.com/wp-content/uploads/2013/01/Fotolia_38595355_Subscription_Monthly_XL.jpg', links: [] }
     ]
   end
 end
