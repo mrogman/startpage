@@ -17,12 +17,15 @@ var Gateway = {
           Gateway.showCategories();
           Gateway.search.$outer.removeClass('search-focused', 200);
         },
-        'keypress': function(e) {
+        'keyup': function(e) {
           if(e.which == 13) { //enter
             Gateway.search.send();
           }
+          else if(e.which == 27){
+            Gateway.search.$input.blur(); //blur on 'esc' keyup
+          }
           //open quick results div if not activated
-          if(!Gateway.search.activated) {
+          else if(!Gateway.search.activated) {
             var clock = Gateway.clock.$container;
             if(clock.is(':visible')) clock.remove();
             Gateway.openQuickResults();
