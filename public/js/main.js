@@ -13,6 +13,7 @@ var Gateway = {
           }
         },
         'blur': function() {
+          Gateway.clock.$container.remove();
           Gateway.showCategories();
           Gateway.search.$outer.removeClass('search-focused', 200);
         },
@@ -33,6 +34,8 @@ var Gateway = {
     Gateway.$middle = $('.middle');
 
     Gateway.search.getElements();
+
+    Gateway.clock.$container = $('div.clock');
   },
 
   renderViews: function() {
@@ -95,7 +98,9 @@ var Gateway = {
       //send search to DuckDuckGo on 'return' keydown
       window.location.href = 'https://duckduckgo.com/?q=' + Gateway.search.$input.val();
     }
-  }
+  },
+
+  clock: {}
 }
 
 var shortcutBarView = Backbone.View.extend({
