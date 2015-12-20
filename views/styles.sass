@@ -49,9 +49,52 @@ h2
 .header
   display: block
   position: fixed
-  height: $header-height
   width: 100%
   background: rgba(100, 100, 100, 0.5)
+
+  $icon-size: 25px
+
+  .header-left,
+  .tab-block,
+  .header-tab,
+  .tab-icon,
+  .tab-data
+    display: inline-block
+
+  .header-left, .tab-block
+    margin: 5px 0
+
+  .header-left
+    float: left
+    width: 20%
+    height: 100%
+    color: lightgray
+
+    span.hl-icon
+      font-size: 20px
+      line-height: $icon-size
+      padding: 0 0 0 20px
+
+  .tab-block
+    height: 100%
+    width: 80%
+    text-align: right
+
+    .header-tab
+      color: lightgray
+      vertical-align: middle
+      margin: 0 1.5vw
+
+      .tab-icon
+        i
+          font-size: $icon-size
+          color: #ada7c5
+
+      .tab-data
+        height: 100%
+        text-align: left
+        font-size: 0.9em
+        padding: 0 10px
 
 div.content
   display: table
@@ -249,4 +292,3 @@ div.shortcut-bar
     right: 0
     position: absolute
     z-index: -1
-
