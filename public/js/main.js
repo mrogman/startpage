@@ -1,13 +1,49 @@
 var $cvTriggerZone; //category view trigger zone (opens category view)
 var cvTriggerZone_clicked = false;
 
+//Category view trigger zone
+var CV_TriggerZone = {
+
+  triggered: false,
+
+  init: function() {
+    this.$selector = $('div.main').add($('div.gateway'));
+    this.enable();
+  },
+
+  /* briefly indicate that the trigger zone has been clicked
+   * for the search bar blur event handler to evaluate. */
+  activate: function(e, context) {
+    if(e.target === context) { //exclude child elements
+      this.triggered = true
+      setTimeout(function() {
+        this.triggered = false //reset to false
+      }, 100);
+    }
+    //keep search bar focused if not trigger zone not clicked
+    else Gateway.search.$input.focus();
+  },
+
+  enable: function() {
+    this.$selector.on('click', function(e) {
+      CV_TriggerZone.activate(e, this)
+      this.activateEvent = e
+    });
+    this.triggered = false //ensure trigggered is false when set to enabled
+  },
+
+  disable: function() {
+    this.$selector.off('click', this.activateEvent);
+  }
+
+}
+
 var Gateway = {
 
   init: function() {
     Gateway.renderViews();
     Gateway.getElements();
     Gateway.$middle.css({ height: '0' });
-    $cvTriggerZone = $('div.main').add($('div.gateway'));
 
     Gateway.search.$input.on({
         'focus': function() {
@@ -19,7 +55,7 @@ var Gateway = {
         'blur': function() {
           //show category view if clicked within the trigger zone
           setTimeout(function() { //brief pause to allow boolean to be set
-            if(cvTriggerZone_clicked) {
+            if(CV_TriggerZone.triggered) {
               //show category view
               Gateway.clock.$container.remove();
               Gateway.showCategories();
@@ -45,20 +81,6 @@ var Gateway = {
     })
     .focus();
 
-    /* briefly indicate that the trigger zone has been clicked
-     * for the search bar blur event handler to evaluate.
-     * Note: event handler detached in Gateway.showCategories() */
-    $cvTriggerZone.on('click', function(e) {
-      if(e.target === this) { //exclude child elements
-        console.log('clicked category view trigger zone')
-        cvTriggerZone_clicked = true
-        setTimeout(function() {
-          cvTriggerZone_clicked = false //reset to false
-        }, 100);
-      }
-      //keep search bar focused if not trigger zone not clicked
-      else Gateway.search.$input.focus();
-    });
   },
 
   getElements: function() {
@@ -109,8 +131,8 @@ var Gateway = {
         Gateway.category_view.$categoryViewer.fadeIn('fast');
       });
     }
-    //disable category view trigger zone click event once open
-    $cvTriggerZone.off('click');
+    //disable category view trigger zone click event while open
+    CV_TriggerZone.disable();
   },
 
   openQuickResults: function() {
@@ -164,7 +186,6 @@ var shortcutBarView = Backbone.View.extend({
     }, 200);
   },
   scFontOut: function() {
-    console.log('mouseout icon');
     $(this).animate({
       color: 'lightgray'
     });
@@ -219,6 +240,8 @@ var quickResultsView = Backbone.View.extend({
       .addClass('qr-active', 400);
     Gateway.shortcut_bar_view.$shorcutBar.fadeOut('fast');
     this.$quickResultsDiv.fadeIn('fast');
+    //enable category view trigger zone while open
+    CV_TriggerZone.enable();
   },
 
   hideQuickResults: function() {
@@ -281,6 +304,8 @@ $(document).ready(function() {
   $('input.search').focus(); //do first!
 
   Gateway.init();
+
+  CV_TriggerZone.init();
 
   runClock();
 
