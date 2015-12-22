@@ -56,10 +56,7 @@ var Gateway = {
           //show category view if clicked within the trigger zone
           setTimeout(function() { //brief pause to allow boolean to be set
             if(CV_TriggerZone.triggered) {
-              //show category view
-              Gateway.clock.$container.remove();
-              Gateway.showCategories();
-              Gateway.search.$outer.removeClass('search-focused', 200);
+              Gateway.category_view.showTransition();
             }
           }, 50);
 
@@ -204,6 +201,16 @@ var categoryView = Backbone.View.extend({
     this.$el.append(html);
   },
 
+  showTransition: function() {
+    //remove clock
+    var clock = Gateway.clock.$container
+    if(clock.is(':visible')) clock.remove();
+    //display category viewer
+    Gateway.showCategories();
+    //unfocus search bar
+    Gateway.search.$outer.removeClass('search-focused', 200);
+  },
+
   hideCategoryViewer: function() {
     this.$categoryViewer.fadeOut('fast');
   },
@@ -254,11 +261,16 @@ var quickResultsView = Backbone.View.extend({
 
   destroy: function(e) {
     e.preventDefault();
+    //hide quick results window
     this.hideQuickResults();
+    //clear query
     Gateway.search.$input.val('');
+    //mark search as inactive
     Gateway.search.activated = false;
     //clear existing quick results data
 
+    //show category view
+    Gateway.category_view.showTransition();
   }
 });
 
