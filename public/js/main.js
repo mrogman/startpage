@@ -38,6 +38,21 @@ var CV_TriggerZone = {
 
 }
 
+var Header = {
+
+  init: function() {
+    Header.getElements();
+  },
+
+  getElements: function() {
+    this.$container = $('div.header');
+    this.$headerLeft = $('div.header-left');
+    this.$tabBlock = $('div.tab-block');
+    this.$tabs = $('div.header-tab');
+  },
+
+}
+
 var Gateway = {
 
   init: function() {
@@ -315,8 +330,8 @@ $(document).ready(function() {
 
   $('input.search').focus(); //do first!
 
+  Header.init();
   Gateway.init();
-
   CV_TriggerZone.init();
 
   runClock();
