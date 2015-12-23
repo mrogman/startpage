@@ -21,8 +21,8 @@ var tabsView = Backbone.View.extend({
     this.$tabs = $('div.header-tab')
   },
 
-  openDropDown: function() {
-    console.log('opening dropdown')
+  openDropDown: function(e) {
+    Dropdown.init($(e.target).parents('div.header-tab'));
   }
 
 });
