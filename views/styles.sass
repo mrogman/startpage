@@ -86,7 +86,7 @@ h2
     .header-tab
       color: lightgray
       vertical-align: middle
-      margin: 0 1.5vw
+      margin: 0
 
       .tab-icon
         i
@@ -96,8 +96,30 @@ h2
       .tab-data
         height: 100%
         text-align: left
-        font-size: 0.9em
+        font-size: 1em
         padding: 0 10px
+
+        span.tab-data-label
+          font-weight: bolder
+          font-size: 1em
+
+        span.tab-data-value
+          color: lightgray
+
+div.dropdown
+  background-color: whitesmoke
+  position: absolute
+  width: 250px
+  height: 300px
+  padding: 10px
+  opacity: 0
+  border-radius: 0 5px 0 5px
+  border-left: solid 5px lightblue
+  font-size: 0.9em
+
+  -webkit-box-shadow: 1px 2px 17px 2px rgba(0,0,0,0.75)
+  -moz-box-shadow: 1px 2px 17px 2px rgba(0,0,0,0.75)
+  box-shadow: 1px 2px 17px 2px rgba(0,0,0,0.75)
 
 div.content
   display: table
