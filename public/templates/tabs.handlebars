@@ -1,0 +1,14 @@
+<div class="tab-block">
+  {{#each models}}
+    <div class="header-tab" id="tab-{{attributes.name}}">
+      <div class="tab-icon">
+        <i class="fa {{attributes.iconClass}} tab-icon">
+      </div>
+      <div class="tab-data">
+        {{#each attributes.tabData}}
+          <span>{{label}}</span><span>{{value}}</span> &nbsp;
+        {{/each}}
+      </div>
+    </div>
+  {{/each}}
+</div>
