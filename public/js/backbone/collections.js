@@ -1,3 +1,7 @@
+var TabsCollection = Backbone.Collection.extend({
+  model: Tab
+});
+
 var ShortcutsCollection = Backbone.Collection.extend({
   model: Shortcut,
   url:'/api/shortcuts/',

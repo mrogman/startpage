@@ -1,3 +1,32 @@
+var tabsView = Backbone.View.extend({
+
+  initialize: function() {
+    this.render();
+    this.getElements();
+  },
+
+  template: Handlebars.templates.tabs,
+
+  render: function() {
+    var html = this.template(this.collection);
+    this.$el.append(html);
+  },
+
+  events: {
+    'click .header-tab': 'openDropDown'
+  },
+
+  getElements: function() {
+    this.$container = $('div.tabs-block'),
+    this.$tabs = $('div.header-tab')
+  },
+
+  openDropDown: function() {
+    console.log('opening dropdown')
+  }
+
+});
+
 var shortcutBarView = Backbone.View.extend({
 
   initialize: function() {
@@ -12,7 +41,7 @@ var shortcutBarView = Backbone.View.extend({
   },
 
   template: Handlebars.templates.shortcutBar,
-  
+
   render: function() {
     var html = this.template(this.collection);
     this.$el.append(html);
