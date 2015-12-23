@@ -38,6 +38,27 @@ var CV_TriggerZone = {
 
 }
 
+var Tab = Backbone.Model.extend({
+
+  defaults: {
+    name: '',
+    iconClass: '',
+    tabData: {}
+  },
+
+  initialize: function() {
+    this.getElements();
+  },
+
+  getElements: function() {
+    this.$container = $('div.header-tab')
+    this.$icon = $('div.tab-icon');
+    this.$tabData = $('div.tab-data');
+  },
+
+});
+
+
 var Header = {
 
   init: function() {
@@ -51,6 +72,33 @@ var Header = {
     this.$tabs = $('div.header-tab');
   },
 
+  tabs: {
+    github:  new Tab({ name: 'github' }),
+    twitter: new Tab({ name: 'twitter' }),
+    reddit:  new Tab({ name: 'reddit' }),
+  }
+
+}
+
+var Dropdown = {
+
+  $el: $('div.dropdown'),
+  $menuItem: null,
+  width: '',
+  height: '',
+
+  init: function() {
+    //create html element
+    Header.$container.after("<div class='dropdown'>this is a dropdown menu</div>")
+  },
+
+  open: function() {
+    this.leftPos = getLeftPos();
+  },
+
+  getLeftPos: function() {
+    return this.$menuItem.position().left
+  }
 }
 
 var Gateway = {
