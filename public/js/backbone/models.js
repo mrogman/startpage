@@ -11,9 +11,9 @@ var Tab = Backbone.Model.extend({
   },
 
   getElements: function() {
-    this.$container = $('div.header-tab')
-    this.$icon = $('div.tab-icon');
-    this.$tabData = $('div.tab-data');
+    this.$container = $('div.header-tab#' + this.name)
+    this.$icon = this.$container.children('div.tab-icon');
+    this.$tabData = this.$container.children('div.tab-data');
   },
 
 });

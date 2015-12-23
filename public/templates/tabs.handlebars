@@ -1,14 +1,14 @@
-<div class="tab-block">
   {{#each models}}
     <div class="header-tab" id="tab-{{attributes.name}}">
       <div class="tab-icon">
-        <i class="fa {{attributes.iconClass}} tab-icon">
+        <i class="fa {{attributes.iconClass}} tab-icon"></i>
       </div>
       <div class="tab-data">
         {{#each attributes.tabData}}
-          <span>{{label}}</span><span>{{value}}</span> &nbsp;
+          <span class="tab-data-label">{{label}} </span>
+          <span class="tab-data-value">{{value}}</span>
+          &nbsp;
         {{/each}}
       </div>
     </div>
   {{/each}}
-</div>
