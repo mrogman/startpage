@@ -27,6 +27,7 @@ var Gateway = {
           }
           else if(e.which == 27){
             Gateway.search.$input.blur(); //blur on 'esc' keyup
+            Gateway.category_view.showTransition();
           }
           //open quick results div if not activated
           else if(!Gateway.search.activated) {
