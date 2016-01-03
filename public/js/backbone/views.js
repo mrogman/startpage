@@ -13,7 +13,7 @@ var tabsView = Backbone.View.extend({
   },
 
   events: {
-    'click .header-tab': 'openDropDown'
+    'click .header-tab': 'triggerDropdown'
   },
 
   getElements: function() {
@@ -21,8 +21,10 @@ var tabsView = Backbone.View.extend({
     this.$tabs = $('div.header-tab')
   },
 
-  openDropDown: function(e) {
-    Dropdown.init($(e.target).parents('div.header-tab'));
+  triggerDropdown: function(e) {
+    var tab = $(e.target).parents('div.header-tab')
+    //open dropdown if not already open
+    if(!Dropdown.isOpen()) Dropdown.init(tab);
   }
 
 });

@@ -1,21 +1,26 @@
 var Dropdown = {
 
-  $tab: null,
   width: '',
   height: '',
 
   init: function(tab) {
     //create html element
-    if(typeof this.el !== 'undefined') Dropdown.remove();
-    this.$tab = tab
-    Header.$tabBlock.after("<div class='dropdown'>this is a dropdown menu</div>");
+    Header.$container.after("<div class='dropdown'>this is a dropdown menu</div>");
+    //initialize elements
     this.el = $('div.dropdown');
-    this.open();
+    this.$tab = tab
+    //open dropdown
+    Dropdown.open();
+  },
+
+  isOpen: function() {
+    return typeof this.el !== 'undefined'
   },
 
   open: function() {
     this.el
       .css({
+        top: Header.$container.height(),
         left: this.getLeftPos(),
         marginTop: '30px'
       })
