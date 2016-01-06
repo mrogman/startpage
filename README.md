@@ -4,7 +4,10 @@ My custom startpage. It serves as a launchpad to my commonly visited sites, an i
 **Status:** moderately functional
 * DuckDuckGo basic search works
 * Shortcut icons are loaded from db
-* Categories are loaded from db
+* Categories are loaded from db, but links are not loaded into the templates yet
+* Reddit, Twitter, Github, tabs not functional
+* DuckDuckGo quick results not functional
+* Support for other search engines does not exist yet
 
 _Note: There is very little one can do to customize the app at this point other than to modify the code yourself. All database entries are hardcoded until an add interface is built._
 
@@ -16,7 +19,7 @@ _Note: There is very little one can do to customize the app at this point other 
 * DuckDuckGo top results (manually parsed with Nokogiri)
 * Support for other search engines (Google, Amazon, Stack Overflow, etc.)
 * Flexible "categories" that can be created and filled with external links
-* Compiled client-side code to be stored locally for rapid launching 
+* Compiled client-side code to be stored locally for rapid launching
 * Ability to recieve the client from the server for demo purposes (rather than store locally)
 
 ## Stack
@@ -24,13 +27,13 @@ _Note: There is very little one can do to customize the app at this point other 
 ### Client
 * Backbone.js
 * jQuery
-* Sass
 * Handlebars
 
 ### Server
 * Sinatra
 * MongoDb
 * Slim
+* Sass
 
 ## Installation
 For now, you must run the application on a server. Since the client app will be sent to the browser every time you open a new window or tab, you will have a faster, more pleasant experience if the app is hosted locally or within your local network.
@@ -49,4 +52,3 @@ ruby app.rb
 
 ## How to use
 Check back later!
-
