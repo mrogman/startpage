@@ -74,6 +74,7 @@ var categoryView = Backbone.View.extend({
     this.render();
     this.$categoryViewer = $('.category-viewer');
     this.$categoryViewer.hide();
+    this.categoryInit();
   },
 
   template: Handlebars.templates.categoryView,
@@ -83,14 +84,53 @@ var categoryView = Backbone.View.extend({
     this.$el.append(html);
   },
 
-  showTransition: function() {
-    //remove clock
-    var clock = Gateway.clock.$container
-    if(clock.is(':visible')) clock.remove();
-    //display category viewer
-    Gateway.showCategories();
-    //unfocus search bar
-    Gateway.search.$outer.removeClass('search-focused', 200);
+  category: {}, //used for manipulating category dom elements
+
+  categoryInit: function() {
+    this.category = {
+      $array: this.$categoryViewer.children('div.category'),
+      models: this.collection.models,
+      origWidth: 175, //in px
+      origHeight: 40, //in vh units
+      scaleWidth: function(scale) { return this.origWidth * scale + 'px' },
+      scaleHeight: function(scale) { return this.origHeight * scale + 'vh' }
+    }
+  },
+
+  /*
+    Animation sequence for category view.
+    1. Sets view outer div to visible and category divs to transparent and 1/4 height.
+    2. Iteratively animates through visible category divs with delay and restores opacity and height
+  */
+  animateIn: function() {
+    var context = this //parent context reference for closures
+
+    var setup = function() {
+      this.$categoryViewer.show();
+      //prepare category divs for animation
+      this.category.$array.css({
+        opacity: '0',
+        background: 'lightgray', //temporary
+        height: this.category.scaleHeight(0.25),
+      });
+    }
+
+    var doAnimation = function(elem) {
+      elem.animate({
+        opacity: '1',
+        height: this.category.scaleHeight(1)
+      }, 400, 'easeOutQuint');
+    }
+
+    setup.call(context);
+    //animate visible category divs on interval
+    $.each(this.category.$array, function(i) {
+      var elem = $(this)
+      var interval = i * 75
+      if(elem.is(':visible')) {
+        setTimeout(doAnimation.bind(context, elem), interval);
+      }
+    });
   },
 
   hideCategoryViewer: function() {
@@ -154,7 +194,7 @@ var quickResultsView = Backbone.View.extend({
     //clear existing quick results data
 
     //show category view
-    Gateway.category_view.showTransition();
+    Gateway.showCategories();
   }
 
 });

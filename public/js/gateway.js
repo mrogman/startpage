@@ -16,7 +16,7 @@ var Gateway = {
           //show category view if clicked within the trigger zone
           setTimeout(function() { //brief pause to allow boolean to be set
             if(CV_TriggerZone.triggered) {
-              Gateway.category_view.showTransition();
+              Gateway.showCategories();
             }
           }, 50);
 
@@ -27,7 +27,7 @@ var Gateway = {
           }
           else if(e.which == 27){
             Gateway.search.$input.blur(); //blur on 'esc' keyup
-            Gateway.category_view.showTransition();
+            Gateway.showCategories();
           }
           //open quick results div if not activated
           else if(!Gateway.search.activated) {
@@ -77,20 +77,43 @@ var Gateway = {
     Gateway.quick_results_view = new quickResultsView({ el: $('.middle') });
   },
 
+  //expand middle section to allow room for categories
+  expand: function() {
+    Gateway.$middle.animate({
+      height: '50vh'
+    }, 400);
+  },
+
+  //collapse middle section to restore initial landing view
+  collapse: function() {
+    Gateway.$middle.animate({
+      height: '10vh'
+    }, 400);
+  },
+
   showCategories: function() {
+    //from quick results view
     if(Gateway.quick_results_view.$quickResultsDiv.is(':visible')) {
       Gateway.quick_results_view.hideQuickResults();
-      Gateway.category_view.$categoryViewer.delay(200).fadeIn(800);
+      setTimeout(function() {
+        Gateway.category_view.animateIn();
+      }, 200);
     }
+    //from landing view
     else {
-      Gateway.$middle.animate({
-        height: '50vh'
-      }, 300, function() {
-        Gateway.category_view.$categoryViewer.fadeIn('fast');
-      });
+      var clock = Gateway.clock.$container
+      if(clock.is(':visible')) clock.remove();
+      Gateway.expand();
+      setTimeout(function() {
+        Gateway.category_view.animateIn();
+      }, 400);
     }
     //disable category view trigger zone click event while open
     CV_TriggerZone.disable();
+    //unfocus search bar
+    Gateway.search.$input.blur();
+    //shrink search bar
+    Gateway.search.$outer.removeClass('search-focused', 600, 'easeOutQuint');
   },
 
   openQuickResults: function() {

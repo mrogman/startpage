@@ -44,5 +44,5 @@ var Category = Backbone.Model.extend({
     name: '',
     background: '',
     links: []
-  }
+  },
 });

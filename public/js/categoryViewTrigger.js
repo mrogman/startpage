@@ -30,6 +30,7 @@ var CV_TriggerZone = {
   },
 
   disable: function() {
+    this.triggered = false
     this.$selector.off('click', this.activateEvent);
   }
 
