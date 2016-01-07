@@ -7,13 +7,18 @@ var Tab = Backbone.Model.extend({
   },
 
   initialize: function() {
-    this.getElements();
+    //this.getElements();
   },
 
-  getElements: function() {
-    this.$container = $('div.header-tab#' + this.name)
-    this.$icon = this.$container.children('div.tab-icon');
-    this.$tabData = this.$container.children('div.tab-data');
+  elements: function() {
+    var $container = $('div.header-tab#tab-' + this.attributes.name)
+    var $icon = $container.children('div.tab-icon');
+    var $tabData = $container.children('div.tab-data');
+    return {
+      container: $container,
+      icon: $icon,
+      tabData: $tabData
+    }
   },
 
 });
