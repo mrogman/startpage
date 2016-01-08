@@ -1,9 +1,12 @@
 var Gateway = {
 
+  collapsed: null,
+
   init: function() {
     Gateway.renderViews();
     Gateway.getElements();
     Gateway.$middle.css({ height: '0' });
+    Gateway.collapsed = true;
 
     Gateway.search.$input.on({
       'focus': function() {
@@ -26,7 +29,7 @@ var Gateway = {
           Gateway.search.send();
         }
         else if(e.which == 27){ //esc
-          if(!Dropdown.isOpen()) {
+          if(!Dropdown.isOpen() && !Gateway.search.activated) {
             Gateway.search.$input.blur();
             Gateway.showCategories();
           }
@@ -46,6 +49,10 @@ var Gateway = {
         if(e.which == 27){ //esc
           if(Dropdown.isOpen()) Dropdown.close()
           else if(Gateway.category_view.active) Gateway.hideCategories();
+          //from quick results view
+          else if(Gateway.quick_results_view.$quickResultsDiv.is(':visible')) {
+            Gateway.quick_results_view.destroy();
+          }
         }
       }
     });
@@ -89,6 +96,7 @@ var Gateway = {
 
   //expand middle section to allow room for categories
   expand: function() {
+    Gateway.collapsed = false;
     Gateway.$middle.animate({
       height: '50vh'
     }, 400);
@@ -96,31 +104,26 @@ var Gateway = {
 
   //collapse middle section to restore initial landing view
   collapse: function() {
+    Gateway.collapsed = true;
     Gateway.$middle.animate({
       height: '0'
     }, 400, 'easeOutCubic');
   },
 
   showCategories: function() {
-    //from quick results view
-    if(Gateway.quick_results_view.$quickResultsDiv.is(':visible')) {
-      Gateway.quick_results_view.hideQuickResults();
-      setTimeout(function() {
-        Gateway.category_view.animateIn();
-      }, 200);
-    }
+
     //from landing view
-    else {
-      var clock = Gateway.clock.$container
-      if(clock.is(':visible')) {
+    if(Gateway.collapsed) {
+      //var clock = Gateway.clock.$container
+      //if(clock.is(':visible')) {
         Gateway.clock.stop();
         Gateway.clock.detach();
-      }
+      //}
       Gateway.expand();
-      setTimeout(function() {
-        Gateway.category_view.animateIn();
-      }, 400);
     }
+    setTimeout(function() {
+      Gateway.category_view.animateIn();
+    }, 400);
     //disable category view trigger zone click event while open
     CV_TriggerZone.disable();
     //unfocus search bar

@@ -180,8 +180,8 @@ var quickResultsView = Backbone.View.extend({
     CV_TriggerZone.enable();
   },
 
-  hideQuickResults: function() {
-    this.$quickResultsDiv.fadeOut('fast');
+  hideQuickResults: function(callback) {
+    this.$quickResultsDiv.fadeOut('fast', callback);
     Gateway.$middle
       .add(Gateway.$container)
       .removeClass('qr-active', 200);
@@ -189,17 +189,13 @@ var quickResultsView = Backbone.View.extend({
   },
 
   destroy: function(e) {
-    e.preventDefault();
-    //hide quick results window
-    this.hideQuickResults();
+    //hide quick results window and show categories
+    this.hideQuickResults(Gateway.showCategories);
     //clear query
     Gateway.search.$input.val('');
     //mark search as inactive
     Gateway.search.activated = false;
     //clear existing quick results data
-
-    //show category view
-    Gateway.showCategories();
   }
 
 });
