@@ -30,8 +30,11 @@ var Dropdown = {
       }, 600, 'easeOutQuart');
   },
 
-  remove: function() {
-    this.el.remove();
+  close: function() {
+    this.el.fadeOut('fast', function() {
+      $(this).remove();
+      Dropdown.el = undefined;
+    })
   },
 
   getLeftPos: function() {

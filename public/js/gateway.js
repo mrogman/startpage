@@ -26,8 +26,10 @@ var Gateway = {
           Gateway.search.send();
         }
         else if(e.which == 27){ //esc
-          Gateway.search.$input.blur();
-          Gateway.showCategories();
+          if(!Dropdown.isOpen()) {
+            Gateway.search.$input.blur();
+            Gateway.showCategories();
+          }
         }
         //open quick results div if not activated
         else if(!Gateway.search.activated) {
@@ -42,7 +44,8 @@ var Gateway = {
     $(window).on({
       'keyup': function(e) {
         if(e.which == 27){ //esc
-          if(Gateway.category_view.active) Gateway.hideCategories();
+          if(Dropdown.isOpen()) Dropdown.close()
+          else if(Gateway.category_view.active) Gateway.hideCategories();
         }
       }
     });
