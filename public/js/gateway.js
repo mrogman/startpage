@@ -37,7 +37,7 @@ var Gateway = {
         //open quick results div if not activated
         else if(!Gateway.search.activated) {
           var clock = Gateway.clock.$container;
-          if(clock.is(':visible')) clock.remove();
+          if(clock.is(':visible')) Gateway.clock.detach();
           Gateway.openQuickResults();
         }
       }

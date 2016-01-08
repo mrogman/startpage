@@ -188,9 +188,16 @@ var quickResultsView = Backbone.View.extend({
     Gateway.shortcut_bar_view.$shorcutBar.fadeIn('fast');
   },
 
-  destroy: function(e) {
+  destroy: function() {
     //hide quick results window and show categories
-    this.hideQuickResults(Gateway.showCategories);
+    this.hideQuickResults(function() {
+      if(Gateway.collapsed) {
+        Gateway.hideCategories();
+      }
+      else {
+        Gateway.showCategories()
+      }
+    });
     //clear query
     Gateway.search.$input.val('');
     //mark search as inactive
