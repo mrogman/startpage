@@ -4,8 +4,7 @@ $(document).ready(function() {
 
   Header.init();
   Gateway.init();
+  Gateway.clock.init();
   CV_TriggerZone.init();
-
-  runClock();
 
 });

@@ -6,36 +6,36 @@ var Gateway = {
     Gateway.$middle.css({ height: '0' });
 
     Gateway.search.$input.on({
-        'focus': function() {
-          Gateway.search.$outer.addClass('search-focused', 200);
-          if(!Gateway.quick_results_view.$quickResultsDiv.is(':visible') && Gateway.search.activated) {
-            Gateway.quick_results_view.showQuickResults();
-          }
-        },
-        'blur': function() {
-          //show category view if clicked within the trigger zone
-          setTimeout(function() { //brief pause to allow boolean to be set
-            if(CV_TriggerZone.triggered) {
-              Gateway.showCategories();
-            }
-          }, 50);
-
-        },
-        'keyup': function(e) {
-          if(e.which == 13) { //enter
-            Gateway.search.send();
-          }
-          else if(e.which == 27){
-            Gateway.search.$input.blur(); //blur on 'esc' keyup
+      'focus': function() {
+        Gateway.search.$outer.addClass('search-focused', 200);
+        if(!Gateway.quick_results_view.$quickResultsDiv.is(':visible') && Gateway.search.activated) {
+          Gateway.quick_results_view.showQuickResults();
+        }
+      },
+      'blur': function() {
+        //show category view if clicked within the trigger zone
+        setTimeout(function() { //brief pause to allow boolean to be set
+          if(CV_TriggerZone.triggered) {
             Gateway.showCategories();
           }
-          //open quick results div if not activated
-          else if(!Gateway.search.activated) {
-            var clock = Gateway.clock.$container;
-            if(clock.is(':visible')) clock.remove();
-            Gateway.openQuickResults();
-          }
+        }, 50);
+
+      },
+      'keyup': function(e) {
+        if(e.which == 13) { //enter
+          Gateway.search.send();
         }
+        else if(e.which == 27){
+          Gateway.search.$input.blur(); //blur on 'esc' keyup
+          Gateway.showCategories();
+        }
+        //open quick results div if not activated
+        else if(!Gateway.search.activated) {
+          var clock = Gateway.clock.$container;
+          if(clock.is(':visible')) clock.remove();
+          Gateway.openQuickResults();
+        }
+      }
     })
     .focus();
 
@@ -47,8 +47,7 @@ var Gateway = {
     Gateway.$middle = $('.middle');
 
     Gateway.search.getElements();
-
-    Gateway.clock.$container = $('div.clock');
+    Gateway.clock.getElements();
   },
 
   renderViews: function() {
@@ -102,7 +101,10 @@ var Gateway = {
     //from landing view
     else {
       var clock = Gateway.clock.$container
-      if(clock.is(':visible')) clock.remove();
+      if(clock.is(':visible')) {
+        Gateway.clock.stop();
+        clock.remove();
+      }
       Gateway.expand();
       setTimeout(function() {
         Gateway.category_view.animateIn();
