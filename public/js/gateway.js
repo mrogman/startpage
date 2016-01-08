@@ -25,8 +25,8 @@ var Gateway = {
         if(e.which == 13) { //enter
           Gateway.search.send();
         }
-        else if(e.which == 27){
-          Gateway.search.$input.blur(); //blur on 'esc' keyup
+        else if(e.which == 27){ //esc
+          Gateway.search.$input.blur();
           Gateway.showCategories();
         }
         //open quick results div if not activated
@@ -38,6 +38,14 @@ var Gateway = {
       }
     })
     .focus();
+
+    $(window).on({
+      'keyup': function(e) {
+        if(e.which == 27){ //esc
+          if(Gateway.category_view.active) Gateway.hideCategories();
+        }
+      }
+    });
 
   },
 
@@ -86,8 +94,8 @@ var Gateway = {
   //collapse middle section to restore initial landing view
   collapse: function() {
     Gateway.$middle.animate({
-      height: '10vh'
-    }, 400);
+      height: '0'
+    }, 400, 'easeOutCubic');
   },
 
   showCategories: function() {
@@ -103,7 +111,7 @@ var Gateway = {
       var clock = Gateway.clock.$container
       if(clock.is(':visible')) {
         Gateway.clock.stop();
-        clock.remove();
+        Gateway.clock.detach();
       }
       Gateway.expand();
       setTimeout(function() {
@@ -116,6 +124,14 @@ var Gateway = {
     Gateway.search.$input.blur();
     //shrink search bar
     Gateway.search.$outer.removeClass('search-focused', 600, 'easeOutQuint');
+  },
+
+  hideCategories: function() {
+    Gateway.category_view.hideCategoryViewer();
+    setTimeout(Gateway.collapse, 200);
+    Gateway.clock.attach().start();
+    Gateway.search.$input.focus();
+    CV_TriggerZone.enable();
   },
 
   openQuickResults: function() {

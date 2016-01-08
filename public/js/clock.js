@@ -31,7 +31,6 @@ Gateway.clock = {
 	},
 
 	refresh: function() {
-		console.log('refreshing clock')
 		var seconds = new Date().getSeconds();
 		$("#sec").html(( seconds < 10 ? "0" : "" ) + seconds);
 
@@ -40,6 +39,16 @@ Gateway.clock = {
 
 		var hours = new Date().getHours();
 		$("#hours").html(( hours < 10 ? "0" : "" ) + hours);
+	},
+
+	attach: function() {
+		Gateway.$top.prepend(this.detachable);
+		this.detachable.hide().delay(200).fadeIn('slow');
+		return this
+	},
+
+	detach: function() {
+		this.detachable = this.$container.detach();
 	}
 
 }

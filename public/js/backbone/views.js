@@ -70,6 +70,8 @@ var shortcutBarView = Backbone.View.extend({
 
 var categoryView = Backbone.View.extend({
 
+  active: false,
+
   initialize: function() {
     this.render();
     this.$categoryViewer = $('.category-viewer');
@@ -103,7 +105,9 @@ var categoryView = Backbone.View.extend({
     2. Iteratively animates through visible category divs with delay and restores opacity and height
   */
   animateIn: function() {
-    var context = this //parent context reference for closures
+    this.active = true;
+
+    var context = this; //parent context reference for closures
 
     var setup = function() {
       this.$categoryViewer.show();
@@ -134,6 +138,7 @@ var categoryView = Backbone.View.extend({
   },
 
   hideCategoryViewer: function() {
+    this.active = false;
     this.$categoryViewer.fadeOut('fast');
   },
 
