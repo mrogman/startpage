@@ -63,6 +63,7 @@ var Gateway = {
     Gateway.$container = $('div.gateway')
     Gateway.$top = $('.top');
     Gateway.$middle = $('.middle');
+    Gateway.$bottom = $('.shortcut-bar-wrapper');
 
     Gateway.search.getElements();
     Gateway.clock.getElements();

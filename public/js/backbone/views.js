@@ -34,12 +34,20 @@ var shortcutBarView = Backbone.View.extend({
   initialize: function() {
     this.render();
     this.$container = $('.shortcut-bar-wrapper');
-    this.$shorcutBar = $('.shortcut-bar');
+    this.$shortcutBar = $('.shortcut-bar');
     this.$shortcutIcons = $('.shortcut i');
     this.$container
       .hide()
       .fadeIn(600);
-    this.$shortcutIcons.on('mouseout', this.scFontOut);
+
+    this.$shortcutBar.on({
+      mouseleave: function() { Background.removeBlur() },
+    });
+
+    this.$shortcutIcons.on({
+      mouseenter: function() { Background.triggerBlur() },
+      mouseout: this.scFontOut
+    })
   },
 
   template: Handlebars.templates.shortcutBar,
@@ -50,7 +58,7 @@ var shortcutBarView = Backbone.View.extend({
   },
 
   events: {
-    //'mouseout i': 'scFontOut'
+
   },
 
   scFontHover: function(elem, hoverColor) {
@@ -174,7 +182,7 @@ var quickResultsView = Backbone.View.extend({
     Gateway.$middle
       .add(Gateway.$container)
       .addClass('qr-active', 400);
-    Gateway.shortcut_bar_view.$shorcutBar.fadeOut('fast');
+    Gateway.shortcut_bar_view.$shortcutBar.fadeOut('fast');
     this.$quickResultsDiv.fadeIn('fast');
     //enable category view trigger zone while open
     CV_TriggerZone.enable();
@@ -185,7 +193,7 @@ var quickResultsView = Backbone.View.extend({
     Gateway.$middle
       .add(Gateway.$container)
       .removeClass('qr-active', 200);
-    Gateway.shortcut_bar_view.$shorcutBar.fadeIn('fast');
+    Gateway.shortcut_bar_view.$shortcutBar.fadeIn('fast');
   },
 
   destroy: function() {
