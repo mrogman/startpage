@@ -1,6 +1,7 @@
 $font-stack: sans-serif
 $primary-color: #333333
 $secondary-color: #737373
+$primary-shadow: 4px 4px 5px rgba(26, 26, 26, 0.75)
 
 $header-height: 30px
 $footer-height: 30px
@@ -26,7 +27,7 @@ body,
   background-color: black
 
 .main
-  background: url('img/main/bg.jpg')
+  background: url('img/main/spacebg.jpg')
   background-size: cover
   background-position: center
 
@@ -166,6 +167,8 @@ div.content
         overflow: hidden
 
 .clock
+  $shadow: 2px 2px 5px black
+
   text-align: center
   margin: -5vh auto 1.5em
   color: #fff
@@ -176,7 +179,7 @@ div.content
     float: left
     width: 50%
     font-size: 1.2em
-    text-shadow: 0 0 8px black
+    text-shadow: $shadow
     padding: 0
     text-align: left
 
@@ -192,7 +195,7 @@ div.content
       display: inline
       font-size: 1.2em
       text-align: center
-      text-shadow: 0 0 8px black
+      text-shadow: $shadow
 
   #point
     position: relative
@@ -278,9 +281,9 @@ div.search
   &.search-focused
     background: $hi-color
     width: 100%
-    -webkit-box-shadow: 5px 4px 5px -1px rgba(0,0,0,0.5)
-    -moz-box-shadow: 5px 4px 5px -1px rgba(0,0,0,0.5)
-    box-shadow: 5px 4px 5px -1px rgba(0,0,0,0.5)
+    -webkit-box-shadow: 5px 5px 5px -1px rgba(0,0,0,0.5)
+    -moz-box-shadow: 5px 5px 5px -1px rgba(0,0,0,0.5)
+    box-shadow: 5px 5px 5px -1px rgba(0,0,0,0.5)
 
   &:hover
     background: $hi-color
@@ -341,7 +344,7 @@ div.shortcut-bar
     i
       font-size: $sc-size - 1vh
       color: lightgray
-      text-shadow: 1px 1px 10px #1A1A1A
+      text-shadow: $primary-shadow
 
 .footer
   position: fixed
