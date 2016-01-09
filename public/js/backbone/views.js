@@ -65,12 +65,25 @@ var shortcutBarView = Backbone.View.extend({
     elem.animate({
       color: hoverColor
     }, 200);
+
+    //add label
+    var text = elem.parent().parent().attr('id').split('-')[1].toLowerCase();
+    this.$container.append("<div class='shortcut-label'>" + text + "</div>");
+    var containerWidth = this.$container.width();
+    $('div.shortcut-label')
+      .hide()
+      .css({ width: containerWidth + 'px' })
+      .delay(200)
+      .fadeIn('fast');
   },
 
   scFontOut: function() {
     $(this).animate({
       color: 'lightgray'
     });
+
+    //remove label
+    $('div.shortcut-label').remove();
   }
 
 });

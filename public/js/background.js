@@ -25,7 +25,7 @@ Background = {
 
   triggerBlur: function() {
     this.$el.stop(true, false).delay(100).animate({ blurRadius: 10 }, {
-      duration: 1000,
+      duration: 600,
       easing: 'easeOutQuart',
       step: function() {
         $(this).css({
