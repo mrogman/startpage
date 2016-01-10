@@ -23,10 +23,12 @@ Background = {
       }, 2000, 'easeOutQuint');
   },
 
-  triggerBlur: function() {
-    if(!this.blurred) {
-      this.$el.stop(true, false).delay(100).animate({ blurRadius: 5 }, {
-        duration: 600,
+  blur: function(radius, opacity, duration, delay) {
+    this.$el
+      .stop(true, false)
+      .delay(delay)
+      .animate({ blurRadius: radius, opacity: opacity }, {
+        duration: duration,
         easing: 'easeOutQuart',
         step: function() {
           $(this).css({
@@ -36,25 +38,16 @@ Background = {
           })
         }
       });
-      this.blurred = true;
-    }
+    if(radius == 0) this.blurred = false
+    else this.blurred = true
+  },
+
+  triggerBlur: function() {
+    if(!this.blurred) this.blur(5, 1, 600, 100);
   },
 
   removeBlur: function() {
-    if(this.blurred) {
-      this.$el.stop(true, false).animate({ blurRadius: 0 }, {
-        duration: 600,
-        easing: 'easeOutQuart',
-        step: function() {
-          $(this).css({
-            'filter': 'blur(' + this.blurRadius + 'px)',
-            '-webkit-filter': 'blur(' + this.blurRadius + 'px)',
-            '-moz-filter': 'blur(' + this.blurRadius + 'px)',
-          })
-        }
-      });
-      this.blurred = false;
-    }
+    if(this.blurred) this.blur(0, 1, 600, 100);
   }
 
 }
