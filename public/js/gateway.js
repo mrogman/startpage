@@ -101,6 +101,7 @@ var Gateway = {
     Gateway.$middle.animate({
       height: '50vh'
     }, 400);
+    Background.triggerBlur();
   },
 
   //collapse middle section to restore initial landing view
@@ -109,6 +110,7 @@ var Gateway = {
     Gateway.$middle.animate({
       height: '0'
     }, 400, 'easeOutCubic');
+    Background.removeBlur();
   },
 
   showCategories: function() {
@@ -143,6 +145,7 @@ var Gateway = {
 
   openQuickResults: function() {
     Gateway.search.activated = true;
+    Background.triggerBlur();
     if(Gateway.category_view.$categoryViewer.is(':visible')) Gateway.category_view.hideCategoryViewer();
     Gateway.quick_results_view.showQuickResults();
   },

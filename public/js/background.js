@@ -24,31 +24,37 @@ Background = {
   },
 
   triggerBlur: function() {
-    this.$el.stop(true, false).delay(100).animate({ blurRadius: 5 }, {
-      duration: 600,
-      easing: 'easeOutQuart',
-      step: function() {
-        $(this).css({
-          'filter': 'blur(' + this.blurRadius + 'px)',
-          '-webkit-filter': 'blur(' + this.blurRadius + 'px)',
-          '-moz-filter': 'blur(' + this.blurRadius + 'px)',
-        })
-      }
-    });
+    if(!this.blurred) {
+      this.$el.stop(true, false).delay(100).animate({ blurRadius: 5 }, {
+        duration: 600,
+        easing: 'easeOutQuart',
+        step: function() {
+          $(this).css({
+            'filter': 'blur(' + this.blurRadius + 'px)',
+            '-webkit-filter': 'blur(' + this.blurRadius + 'px)',
+            '-moz-filter': 'blur(' + this.blurRadius + 'px)',
+          })
+        }
+      });
+      this.blurred = true;
+    }
   },
 
   removeBlur: function() {
-    this.$el.stop(true, false).animate({ blurRadius: 0 }, {
-      duration: 600,
-      easing: 'easeOutQuart',
-      step: function() {
-        $(this).css({
-          'filter': 'blur(' + this.blurRadius + 'px)',
-          '-webkit-filter': 'blur(' + this.blurRadius + 'px)',
-          '-moz-filter': 'blur(' + this.blurRadius + 'px)',
-        })
-      }
-    });
+    if(this.blurred) {
+      this.$el.stop(true, false).animate({ blurRadius: 0 }, {
+        duration: 600,
+        easing: 'easeOutQuart',
+        step: function() {
+          $(this).css({
+            'filter': 'blur(' + this.blurRadius + 'px)',
+            '-webkit-filter': 'blur(' + this.blurRadius + 'px)',
+            '-moz-filter': 'blur(' + this.blurRadius + 'px)',
+          })
+        }
+      });
+      this.blurred = false;
+    }
   }
 
 }
