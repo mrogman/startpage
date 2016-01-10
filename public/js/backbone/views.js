@@ -48,6 +48,19 @@ var shortcutBarView = Backbone.View.extend({
       mouseenter: function() { Background.triggerBlur() },
       mouseout: this.scFontOut
     })
+
+    //add condenseText jQuery function
+    $.fn.condenseText = function(tracking, opacity, duration, easing) {
+      return $(this)
+        .css({
+          letterSpacing: tracking.start + 'px',
+          opacity: opacity.start
+        })
+        .animate({
+          letterSpacing: tracking.end,
+          opacity: opacity.end
+        }, duration, easing)
+    }
   },
 
   template: Handlebars.templates.shortcutBar,
@@ -62,29 +75,32 @@ var shortcutBarView = Backbone.View.extend({
   },
 
   scFontHover: function(elem, hoverColor) {
+    //animate shortcut icon
     elem.animate({
       color: hoverColor
     }, 200);
 
-    //add label
+    //insert label
     var text = elem.parent().parent().attr('id').split('-')[1].toLowerCase();
     this.$container.append("<div class='shortcut-label'>" + text + "</div>");
     var containerWidth = this.$container.width();
+
+    //animate label
     $('div.shortcut-label')
-      .hide()
       .css({ width: containerWidth + 'px' })
-      .delay(200)
-      .fadeIn('fast');
+      .delay(400)
+      .condenseText({ start: 15, end: 5 }, { start: 0, end: 1 }, 800, 'easeOutElastic')
   },
 
   scFontOut: function() {
+    //animate shortcut icon
     $(this).animate({
       color: 'lightgray'
     });
 
     //remove label
     $('div.shortcut-label').remove();
-  }
+  },
 
 });
 
