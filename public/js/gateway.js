@@ -10,10 +10,11 @@ var Gateway = {
 
     Gateway.search.$input.on({
       'focus': function() {
+        var quickResultsVisible = Gateway.quick_results_view.$quickResultsDiv.is(':visible')
+        var searchActive = Gateway.search.activated
         Gateway.search.$outer.addClass('search-focused', 200);
-        if(!Gateway.quick_results_view.$quickResultsDiv.is(':visible') && Gateway.search.activated) {
+        if(!quickResultsVisible && searchActive)
           Gateway.quick_results_view.showQuickResults();
-        }
       },
       'blur': function() {
         //show category view if clicked within the trigger zone
@@ -22,13 +23,13 @@ var Gateway = {
             Gateway.showCategories();
           }
         }, 50);
-
       },
       'keyup': function(e) {
         if(e.which == 13) { //enter
           Gateway.search.send();
         }
         else if(e.which == 27){ //esc
+          //open category view unless there is a dropdown open or search is active
           if(!Dropdown.isOpen() && !Gateway.search.activated) {
             Gateway.search.$input.blur();
             Gateway.showCategories();
@@ -70,7 +71,6 @@ var Gateway = {
   },
 
   renderViews: function() {
-
     //fetch shortcuts and render view
     Gateway.shortcuts_collection = new ShortcutsCollection();
     var fetchShortcuts = Gateway.shortcuts_collection.fetch();
@@ -80,7 +80,6 @@ var Gateway = {
         collection: Gateway.shortcuts_collection
       });
     });
-
     //fetch categories and render view
     Gateway.categories_collection = new CategoriesCollection();
     var fetchCategories = Gateway.categories_collection.fetch();
@@ -90,7 +89,6 @@ var Gateway = {
         collection: Gateway.categories_collection
       });
     });
-
     //render quick results view
     Gateway.quick_results_view = new quickResultsView({ el: $('.middle') });
   },
@@ -114,14 +112,10 @@ var Gateway = {
   },
 
   showCategories: function() {
-
-    //from landing view
+    //from landing view (collapsed)
     if(Gateway.collapsed) {
-      //var clock = Gateway.clock.$container
-      //if(clock.is(':visible')) {
-        Gateway.clock.stop();
-        Gateway.clock.detach();
-      //}
+      Gateway.clock.stop();
+      Gateway.clock.detach();
       Gateway.expand();
     }
     setTimeout(function() {
@@ -146,26 +140,9 @@ var Gateway = {
   openQuickResults: function() {
     Gateway.search.activated = true;
     Background.triggerBlur();
-    if(Gateway.category_view.$categoryViewer.is(':visible')) Gateway.category_view.hideCategoryViewer();
+    if(Gateway.category_view.$categoryViewer.is(':visible'))
+      Gateway.category_view.hideCategoryViewer();
     Gateway.quick_results_view.showQuickResults();
-  },
-
-  search: {
-
-    activated: false, //quick result div open
-
-    getElements: function(){
-      this.$outer = $('div.search');
-      this.$input = $('input.search');
-      this.$left = $('div#search-left');
-    },
-
-    send: function() {
-      //send search to DuckDuckGo on 'return' keydown
-      window.location.href = 'https://duckduckgo.com/?q=' + Gateway.search.$input.val();
-    }
-  },
-
-  clock: {}
+  }
 
 }
