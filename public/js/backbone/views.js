@@ -45,7 +45,7 @@ var shortcutBarView = Backbone.View.extend({
     });
 
     this.$shortcutIcons.on({
-      mouseenter: function() { Background.blur(5, 0.75, 600, 100) },
+      mouseenter: function() { Background.triggerBlur(5, 0.75, 600, 100) },
       mouseout: this.scFontOut
     })
 
