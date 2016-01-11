@@ -28,6 +28,7 @@ Gateway.clock = {
 
 	stop: function() {
 		clearInterval(this.refreshInterval);
+		return this
 	},
 
 	refresh: function() {

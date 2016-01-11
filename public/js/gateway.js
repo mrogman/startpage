@@ -114,8 +114,7 @@ var Gateway = {
   showCategories: function() {
     //from landing view (collapsed)
     if(Gateway.collapsed) {
-      Gateway.clock.stop();
-      Gateway.clock.detach();
+      Gateway.clock.stop().detach();
       Gateway.expand();
     }
     setTimeout(function() {
