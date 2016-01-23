@@ -46,8 +46,18 @@ var shortcutBarView = Backbone.View.extend({
 
     this.$shortcutIcons.on({
       mouseenter: function() { Background.triggerBlur(5, 0.75, 600, 100) },
-      mouseout: this.scFontOut
-    })
+      mouseleave: function() { $('div.shortcut-label').remove() },
+      mouseout: this.scFontOut,
+      click: function() {
+        //preserve hover state while loading external link
+        var elem = $(this);
+        var shortcutbar = elem.parents('.shortcut-bar');
+        elem
+          .add(shortcutbar)
+          .off('mouseleave')
+          .off('mouseout');
+      }
+    });
 
     //add condenseText jQuery function
     $.fn.condenseText = function(tracking, opacity, duration, easing) {
@@ -97,9 +107,6 @@ var shortcutBarView = Backbone.View.extend({
     $(this).animate({
       color: 'lightgray'
     });
-
-    //remove label
-    $('div.shortcut-label').remove();
   },
 
 });
